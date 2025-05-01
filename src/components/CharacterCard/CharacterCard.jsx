@@ -1,6 +1,6 @@
 import "./CharacterCard.css";
 
-function CharacterCard({ character , onRemove}) {
+function CharacterCard({ character , onRemove, onSelect}) {
   return (
     <article className="article character">
       <section className="character-data">
@@ -13,7 +13,9 @@ function CharacterCard({ character , onRemove}) {
         </p>
         <p className="character-class">Class: {character.class[0].name}</p>
       </section>
-      <button onClick={()=>onRemove(character.character_id)}>Eliminar</button>
+      <button onClick={() => onSelect()}>+ INFO</button>
+      <button>Edit Character</button>
+      <button onClick={()=>onRemove(character.character_id)}>Delete</button>
     </article>
   );
 }

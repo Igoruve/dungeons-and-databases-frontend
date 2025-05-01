@@ -1,11 +1,13 @@
 import CharacterCard from "../CharacterCard/CharacterCard";
 import { useEffect, useState } from "react";
 import { getAllCharacters } from "../../utils/character";
-import { deletCharacter } from "../../utils/character";
+import { deletCharacter, createCharacter } from "../../utils/character";
+import CharacterCardExtended from "../CharacterCardExtended/CharacterCardExtended";
 
 function CharacterList(onRouteChange) {
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
 
   useEffect(() => {
     handleLoadCharacters();
@@ -35,6 +37,16 @@ function CharacterList(onRouteChange) {
     }
   };
 
+  if (selectedCharacter) {
+    return (
+      <CharacterCardExtended
+        character={selectedCharacter}
+        onRemove={handleRemoveCharacter}
+        onSelect={() => setSelectedCharacter(null)}
+      />
+    );
+  }
+
   return (
     <section>
       {error && <p>{error}</p>}
@@ -44,9 +56,13 @@ function CharacterList(onRouteChange) {
             character={character}
             key={character.character_id}
             onRemove={handleRemoveCharacter}
+            onSelect={() => setSelectedCharacter(character)}
           />
         );
       })}
+      <button>Create New Character</button>{" "}
+      {/* TODO que el boton te lleve al
+      formulario de crear personaje */}
     </section>
   );
 }

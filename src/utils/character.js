@@ -1,8 +1,8 @@
 import FetchData from "./Fetch.js";
 
 async function getAllCharacters() {
-  const character = await FetchData("/character");
-  return character;
+  const response = await FetchData("/character");
+  return response;
 }
 
 async function deletCharacter(id) {
@@ -10,4 +10,9 @@ async function deletCharacter(id) {
   return response;
 }
 
-export { getAllCharacters, deletCharacter };
+async function createCharacter(data) {
+  const response = await FetchData("/character", "POST");
+  return response;
+}
+
+export { getAllCharacters, deletCharacter, createCharacter };

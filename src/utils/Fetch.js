@@ -10,7 +10,7 @@ async function FetchData(route, method = "GET", data = null) {
   };
 
   if (token) {
-    options.headers["Authoritation"] = `Bearer ${token}`;
+    options.headers["Authorization"] = `Bearer ${token}`;
   }
 
   if (data) {

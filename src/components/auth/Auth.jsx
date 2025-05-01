@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function Auth({ onLogin }) {
-  const [error, setError] = useState();//no se si hayq ue poner algo entre parents TODO
+  const [error, setError] = useState(null);//no se si hayq ue poner algo entre parents TODO
   const [isRegister, setIsRegister] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
