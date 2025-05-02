@@ -17,6 +17,9 @@ function NavBar({ route, onRouteChange }) {
             Characters
           </button>
         </li>
+        <li className={"nav-item" + (route === "notes" ? "active" : "")}>
+          <button onClick={() => onRouteChange("notes")}>Notes</button>
+        </li>
         <li className={"nav-item" + (route === "login" ? "active" : "")}>
           <button onClick={() => onRouteChange("login")}>Login</button>
         </li>

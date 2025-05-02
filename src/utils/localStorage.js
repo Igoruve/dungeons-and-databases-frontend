@@ -27,4 +27,16 @@ function removeToken() {
   removeFromLocalStorage("token");
 }
 
-export { saveToken, getToken, removeToken };
+function saveUser(user) {
+  saveToLocalStorage("user", user);
+}
+
+function getUser() {
+  return getFromLocalStorage("user", null);
+}
+
+function removeUser() {
+  removeFromLocalStorage("user");
+}
+
+export { saveToken, getToken, removeToken, saveUser, getUser, removeUser };

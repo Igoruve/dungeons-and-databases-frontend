@@ -1,5 +1,5 @@
 const BASE_URL = "http://localhost:3000/api";
-import { getToken } from "./localStorage";
+import { getToken, getUser } from "./localStorage";
 
 async function FetchData(route, method = "GET", data = null) {
   const url = BASE_URL + route;

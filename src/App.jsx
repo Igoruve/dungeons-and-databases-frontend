@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import CharacterList from "./components/CharacterList/CharacterList.jsx";
+import NotesList from "./components/NotesList/NotesList.jsx";
 import NavBar from "./components/Navbar/Navbar.jsx";
 import Auth from "./components/auth/Auth.jsx";
 import { login } from "./utils/auth.js";
@@ -30,6 +31,7 @@ function App() {
   const routes = {
     characters: <CharacterList onRouteChange={handleRouteChange} />,
     login: <Auth onLogin={handleLogin} />,
+    notes: <NotesList onRouteChange={handleRouteChange} />,
   };
 
   return (

@@ -5,6 +5,11 @@ async function getAllCharacters() {
   return response;
 }
 
+async function getCharactersByUserId(user_id) {
+  const response = await FetchData(`/user/${user_id}/character`);
+  return response;
+}
+
 async function deletCharacter(id) {
   const response = await FetchData(`/character/${id}`, "DELETE");
   return response;
@@ -15,4 +20,9 @@ async function createCharacter(data) {
   return response;
 }
 
-export { getAllCharacters, deletCharacter, createCharacter };
+export {
+  getAllCharacters,
+  deletCharacter,
+  createCharacter,
+  getCharactersByUserId,
+};
