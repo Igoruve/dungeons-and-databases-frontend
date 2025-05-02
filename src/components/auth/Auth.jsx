@@ -27,15 +27,12 @@ function Auth({ onLogin }) {
     
     try {
       console.log("Attempting login with:", userData.email);
-      const result = await onLogin(userData.email, userData.password);
-      
+      const result = await onLogin(userData.email, userData.password);      
       if (result && result.error) {
         console.error("Login failed:", result.error);
         setError(result.error || "Login failed. Please try again.");
       } else {
         console.log("Login successful:", result);
-        // We're not using onRouteChange here anymore
-        // The redirect will be handled by the App component based on auth state
       }
     } catch (err) {
       console.error("Login error:", err);

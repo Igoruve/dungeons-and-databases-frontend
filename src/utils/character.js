@@ -10,7 +10,7 @@ async function getCharactersByUserId(user_id) {
   return response;
 }
 
-async function deletCharacter(id) {
+async function deleteCharacter(id) {
   const response = await FetchData(`/character/${id}`, "DELETE");
   return response;
 }
@@ -22,7 +22,7 @@ async function createCharacter(data) {
 
 export {
   getAllCharacters,
-  deletCharacter,
+  deleteCharacter,
   createCharacter,
   getCharactersByUserId,
 };

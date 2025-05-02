@@ -7,7 +7,6 @@ export const login = async (email, password) => {
     password,
   };
   const result = await FetchData("/auth/login", "POST", data);
-  console.log("login result", result);
 
   if (result && !result.error) {
     if (result.token) {

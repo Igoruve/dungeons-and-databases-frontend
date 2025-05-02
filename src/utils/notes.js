@@ -10,9 +10,14 @@ async function deleteNotes(id) {
   return response;
 }
 
+async function getNotesByUserId(user_id) {
+  const response = await FetchData(`/user/${user_id}/notes`);
+  return response;
+}
+
 async function createNotes(data) {
   const response = await FetchData("/notes", "POST");
   return response;
 }
 
-export { getAllNotes, deleteNotes, createNotes };
+export { getAllNotes, deleteNotes, createNotes, getNotesByUserId };
