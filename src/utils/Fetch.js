@@ -18,12 +18,20 @@ async function FetchData(route, method = "GET", data = null) {
     options.body = JSON.stringify(data);
   }
 
-  const response = await fetch(url, options);
-  const responseData = await response.json();
-  if (!response.ok) {
-    responseData.status = response.status;
+  try {
+    const response = await fetch(url, options);
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      console.error(responseData);
+      throw new Error(responseData.error);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
-  return responseData;
 }
 
 export default FetchData;

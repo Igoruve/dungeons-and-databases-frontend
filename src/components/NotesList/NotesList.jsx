@@ -1,4 +1,4 @@
-import NotesCard from "../Notes/NotesCard";
+import NotesCard from "../NotesCard/NotesCard";
 import { useEffect, useState } from "react";
 import { getAllNotes, deleteNotes, getNotesByUserId } from "../../utils/notes";
 import NotesCardExtended from "../NotesCardExtended/NotesCardExtended";

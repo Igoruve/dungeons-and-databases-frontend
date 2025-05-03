@@ -4,6 +4,7 @@ import CharacterList from "./components/CharacterList/CharacterList.jsx";
 import NotesList from "./components/NotesList/NotesList.jsx";
 import NavBar from "./components/Navbar/Navbar.jsx";
 import Auth from "./components/auth/Auth.jsx";
+import Browser from "./components/browser/browser.jsx";
 import { login } from "./utils/auth.js";
 import { saveToken } from "./utils/localStorage.js";
 
@@ -32,6 +33,7 @@ function App() {
     characters: <CharacterList onRouteChange={handleRouteChange} />,
     login: <Auth onLogin={handleLogin} />,
     notes: <NotesList onRouteChange={handleRouteChange} />,
+    browser: <Browser onRouteChange={handleRouteChange} />,
   };
 
   return (

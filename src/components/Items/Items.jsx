@@ -1,11 +1,18 @@
 function ItemsCard({ item }) {
-    const quantity = item.characters?.[0]?.character_has_item?.quantity ?? 1;
-  
-    return (
-      <section className="character-items">
-        <p>{item.name} ({quantity})</p>
-      </section>
-    );
+  let quantity = 1; 
+
+  if (item.characters && item.characters.length > 0) {
+    const firstCharacter = item.characters[0];
+    if (firstCharacter.character_has_item && firstCharacter.character_has_item.quantity != null) {
+      quantity = firstCharacter.character_has_item.quantity;
+    }
   }
-  
+
+  return (
+    <section className="character-items">
+      <p>{item.name} ({quantity})</p>
+    </section>
+  );
+}
+
 export default ItemsCard;

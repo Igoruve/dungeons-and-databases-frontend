@@ -76,7 +76,9 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
 
       <h3>Items</h3>
       {items && items.length > 0 ? (
-        items.map((item) => <ItemsCard key={item.item_id} item={item} />)
+        items.map((item) => (
+          <ItemsCard key={item.item_id} item={item} character={character} />
+        ))
       ) : (
         <p>No items found.</p>
       )}
