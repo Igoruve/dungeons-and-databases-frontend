@@ -2,12 +2,5 @@
 export default {
   darkMode: "media",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  theme: {
-    extend: {
-      colors: {
-        primaryBg: "#090809",
-      },
-    },
-  },
   plugins: [],
 };

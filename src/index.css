@@ -8,3 +8,8 @@
   @apply text-white uppercase px-4 py-2;
 }
 
+:root {
+  --dark-bg-color: #090809;
+  --primary-bg-color: #18181b;
+  --accent-color: #EF4444;
+}

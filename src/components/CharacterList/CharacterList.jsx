@@ -79,7 +79,7 @@ function CharacterList() {
   }
 
   return (
-    <section className="flex flex-col space-y-4 py-10 bg-primaryBg h-screen">
+    <section className="flex flex-col space-y-4 py-10 bg-[--dark-bg-color] h-screen">
       <h2 className="absolute text-white top-0 left-0 right-0 text-center py-4">
         My Characters
       </h2>

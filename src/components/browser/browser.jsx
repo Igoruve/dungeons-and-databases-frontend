@@ -73,11 +73,11 @@ function Browser() {
 
   return (
     <>
-      <section className="bg-primaryBg min-h-screen py-10 mb-8">
+      <section className="bg-[--primary-bg-color] min-h-screen py-10 mb-8">
         <h2 className="absolute text-white top-0 left-0 right-0 text-center py-4">
           Search
         </h2>
-        <article className="w-100 px-4 py-8 mx-4 flex flex-row min-h-40 gap-4 rounded-md">
+        <article className="w-100 px-4 py-8 flex flex-row min-h-40 gap-4 sticky top-0 bg-[--primary-bg-color] border-b">
           <form
             onSubmit={handleSubmit}
             className="flex flex-row w-full justify-arround gap-4"

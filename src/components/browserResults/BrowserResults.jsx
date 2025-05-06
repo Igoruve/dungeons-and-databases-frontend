@@ -18,7 +18,7 @@ function BrowserResults({ results }) {
 
         return (
           <article
-            className="w-100 bg-primaryBg mx-4 min-h-40 gap-4 rounded-md mb-4"
+            className="w-100 bg-[--primary-bg-color] mx-4 min-h-40 gap-4 rounded-md mb-4"
             key={key}
           >
           
