@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./App.css";
 import CharacterList from "./components/CharacterList/CharacterList.jsx";
 import NotesList from "./components/NotesList/NotesList.jsx";
@@ -7,39 +7,33 @@ import Auth from "./components/auth/Auth.jsx";
 import Browser from "./components/browser/browser.jsx";
 import { login } from "./utils/auth.js";
 import { saveToken } from "./utils/localStorage.js";
+import RouteContext from "./context/RouterContext.jsx";
+import { AuthComponent } from "./context/AuthContext.jsx";
 
 function App() {
   const [route, setRoute] = useState("home");
-  const [userData, setUserData] = useState(null);
-
-  const handleLogin = async (email, password) => {
-    const result = await login(email, password);
-    if (result.error) {
-      return result.error;
-    } else {
-      console.log("login", result);
-      setUserData(result.user);
-      saveToken(result.token);
-      setRoute("home");
-      return null;
-    }
-  };
 
   const handleRouteChange = (newRoute) => {
     setRoute(newRoute);
   };
 
   const routes = {
-    characters: <CharacterList onRouteChange={handleRouteChange} />,
-    login: <Auth onLogin={handleLogin} />,
-    notes: <NotesList onRouteChange={handleRouteChange} />,
-    browser: <Browser onRouteChange={handleRouteChange} />,
+    characters: <CharacterList />,
+    login: <Auth />,
+    notes: <NotesList />,
+    browser: <Browser />,
   };
 
   return (
     <>
-      <NavBar route={route} onRouteChange={handleRouteChange} />
-      {routes[route]}
+      <RouteContext.Provider
+        value={{ route: route, onRouteChange: handleRouteChange }}
+      >
+        <AuthComponent>
+          <NavBar />
+          {routes[route]}
+        </AuthComponent>
+      </RouteContext.Provider>
     </>
   );
 }

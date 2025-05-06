@@ -1,10 +1,10 @@
 function SpeciesCard({ data }) {
   return (
     <>
-      <p>{data.description}</p>
-      <p>Creature Type: {data.creature_type}</p>
-      <p>Size: {data.size}</p>
-      <p>Speed: {data.speed}</p>
+      <p className="text-white">{data.description}</p>
+      <p className="text-white">Creature Type: {data.creature_type}</p>
+      <p className="text-white">Size: {data.size}</p>
+      <p className="text-white">Speed: {data.speed}</p>
     </>
   );
 }

@@ -17,9 +17,11 @@ function BrowserResults({ results }) {
         }-${i.data.name || "unknown"}`;
 
         return (
-          <article key={key}>
-            <h3>{i.data.name}</h3>
-
+          <article
+            className="w-100 bg-primaryBg mx-4 min-h-40 gap-4 rounded-md mb-4"
+            key={key}
+          >
+          
             {i.type === "class" && <ClassCard data={i.data} />}
 
             {i.type === "items" && <ItemCard data={i.data} />}

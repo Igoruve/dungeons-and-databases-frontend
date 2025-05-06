@@ -7,7 +7,6 @@ import {
   getStatsByCharacterId,
 } from "../../utils/characterDetails";
 
-import "./CharacterCardExtended.css";
 import { useEffect, useState } from "react";
 import StatsCard from "../stats/Stats";
 import SkillsCard from "../Skills/skills";

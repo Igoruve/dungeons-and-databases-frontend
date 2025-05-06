@@ -1,34 +1,103 @@
 import { removeToken } from "../../utils/localStorage";
+import RouteContext from "../../context/RouterContext";
+import { useContext } from "react";
+import character from "../../assets/character.svg";
 
-function NavBar({ route, onRouteChange }) {
-  const handleLogOut = () => {
-    removeToken();
-    onRouteChange("home");
-  };
+function NavBar({ handleLogOut }) {
+  const { route, onRouteChange } = useContext(RouteContext);
+  const baseButtonClasses =
+  "w-full text-xs py-2 text-center flex flex-col justify-center items-center gap-1";
+
 
   return (
-    <nav>
-      <ul className="nav-list">
-        <li className={"nav-item" + (route === "home" ? "active" : "")}>
-          <button onClick={() => onRouteChange("home")}>Home</button>
-        </li>
-        <li className={"nav-item" + (route === "characters" ? "active" : "")}>
-          <button onClick={() => onRouteChange("characters")}>
+    <nav className="fixed bottom-0 z-10 bg-zinc-900 h-20 w-screen flex items-center justify-center border-t-2 border-grey-500">
+      <ul className="flex flex-wrap justify-center items-center h-full w-full gap-x-4 px-4">
+        <li className="flex-1 flex justify-center items-center">
+          <button
+            className={`${baseButtonClasses} ${
+              route === "characters" ? "text-red-500 font-bold" : "text-white"
+            }`}
+            onClick={() => onRouteChange("characters")}
+          >
+            <svg
+              className={`${
+                route === "characters"
+                  ? "w-6 h-6 mb-1 text-red-500 font-bold"
+                  : ""
+              }`}
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5M9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8m1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5m-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96q.04-.245.04-.5M7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0" />
+            </svg>
             Characters
           </button>
         </li>
-        <li className={"nav-item" + (route === "notes" ? "active" : "")}>
-          <button onClick={() => onRouteChange("notes")}>Notes</button>
+        <li className="flex-1 flex justify-center items-center">
+          <button
+            className={`${baseButtonClasses} ${
+              route === "notes" ? "text-red-500 font-bold" : "text-white"
+            }`}
+            onClick={() => onRouteChange("notes")}
+          >
+            <svg
+              className={`${
+                route === "notes" ? "w-6 h-6 mb-1 text-red-500 font-bold" : ""
+              }}`}
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="currentColor"
+            >
+              <path d="M160-400v-80h280v80H160Zm0-160v-80h440v80H160Zm0-160v-80h440v80H160Zm360 560v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T863-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+            </svg>
+            Notes
+          </button>
         </li>
-        <li className={"nav-item" + (route === "browser" ? "active" : "")}>
-          <button onClick={() => onRouteChange("browser")}>Browser</button>
+        <li className="flex-1 flex justify-center items-center">
+          <button
+            className={`${baseButtonClasses} ${
+              route === "browser" ? "text-red-500 font-bold" : "text-white"
+            }`}
+            onClick={() => onRouteChange("browser")}
+          >
+            <svg
+              className="w-6 h-6 mb-1"
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="currentColor"
+            >
+              <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+            </svg>
+            Browser
+          </button>
         </li>
-        <li className={"nav-item" + (route === "login" ? "active" : "")}>
-          <button onClick={() => onRouteChange("login")}>Login</button>
+        <li className="flex-1 flex justify-center items-center">
+          <button
+            className={`${baseButtonClasses} ${
+              route === "login" ? "text-red-500 font-bold" : "text-white"
+            }`}
+            onClick={() => onRouteChange("login")}
+          >
+            Login
+          </button>
         </li>
-        <li className={"nav-item"}>
-          <button onClick={handleLogOut}>Logout</button>
-        </li>
+        {/*         <li className="flex-1">
+          <button
+            className={`${baseButtonClasses} ${
+              route === "login" ? "text-red-500 font-bold" : "text-white"
+            }`}
+            onClick={handleLogOut}
+          >
+            Logout
+          </button>
+        </li> */}
       </ul>
     </nav>
   );

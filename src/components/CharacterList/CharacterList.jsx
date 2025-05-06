@@ -1,26 +1,33 @@
+import { useEffect, useState, useContext } from "react";
 import CharacterCard from "../CharacterCard/CharacterCard";
-import { useEffect, useState } from "react";
 import { getCharactersByUserId, deleteCharacter } from "../../utils/character";
 import CharacterCardExtended from "../CharacterCardExtended/CharacterCardExtended";
-import { getUser } from "../../utils/localStorage";
+import { AuthContext } from "../../context/AuthContext";
+import RouteContext from "../../context/RouterContext";
 
-function CharacterList({ onRouteChange }) {
+function CharacterList() {
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
+  const { userData } = useContext(AuthContext);
+  const { onRouteChange } = useContext(RouteContext);
+
   useEffect(() => {
-    handleLoadCharacters();
-  }, []);
+    if (!userData) {
+      onRouteChange("login");
+    } else {
+      handleLoadCharacters();
+    }
+  }, [userData, onRouteChange]);
 
   const handleLoadCharacters = async () => {
     try {
-      const user = getUser();
-      if (!user) {
+      if (!userData) {
         onRouteChange("login");
         return;
       }
-      const data = await getCharactersByUserId(user.user_id);
+      const data = await getCharactersByUserId(userData.user_id);
       if (data.error) {
         if (data.status === 401) {
           onRouteChange("login");
@@ -45,7 +52,8 @@ function CharacterList({ onRouteChange }) {
       if (response.error) {
         setError(`Error deleting character: ${response.error}`);
       } else {
-        setCharacters(characters.filter((char) => char.character_id !== character_id)
+        setCharacters(
+          characters.filter((char) => char.character_id !== character_id)
         );
         if (selectedCharacter?.character_id === character_id) {
           setSelectedCharacter(null);
@@ -71,7 +79,10 @@ function CharacterList({ onRouteChange }) {
   }
 
   return (
-    <section>
+    <section className="flex flex-col space-y-4 py-10 bg-primaryBg h-screen">
+      <h2 className="absolute text-white top-0 left-0 right-0 text-center py-4">
+        My Characters
+      </h2>
       {error && <p>{error}</p>}
       {characters.length === 0 ? (
         <p>No characters found.</p>
@@ -85,7 +96,7 @@ function CharacterList({ onRouteChange }) {
           />
         ))
       )}
-      <button onClick={handleCreateCharacter}>Create New Character</button>
+      <button className="bottom-0" onClick={handleCreateCharacter}>Create New Character</button>
     </section>
   );
 }

@@ -1,19 +1,27 @@
 function ClassCard({ data }) {
+  const baseButtonClasses =
+    "w-full text-white text-xs py-2 text-center flex flex-col justify-center items-center";
   return (
-    <>
-      <p>{data.description}</p>
-      <p>Hit Die: {data.hit_die}</p>
-      <p>Main Stat: {data.main_stat}</p>
-      <p>Caster: {data.caster === 1 ? "yes" : "no"}</p>
-      <p>Saving Throws Proficiencies: {data.saving_throw_proficiencies}</p>
-      <p>
-        Tool Proficiencies:{" "}
-        {data.tool_proficiencies ? data.tool_proficiencies : "None"}
-      </p>
-      <p>Weapon Proficiencies: {data.weapon_proficiencies}</p>
-      <p>Skill Proficiencies: {data.skill_proficiencies}</p>
-      <p>Armor Training: {data.armor_training}</p>
-    </>
+    <article>
+      <section className="w-100 flex flex-row h-40 gap-4 border-gray-500 border-t-2">
+        <div className="flex flex-col flex-1">
+          <h2 className="text-white text-lg py-4">{data.name}</h2>
+          <p className="text-white text-opacity-70">{data.description}</p>
+        </div>
+        <div className="flex flex-col items-end justify-center">
+          <button className={`${baseButtonClasses}`} onClick={() => onSelect()}>
+            More Info.
+          </button>
+          <button className={`${baseButtonClasses}`}>Edit</button>
+          <button
+            className={`${baseButtonClasses}`}
+            onClick={() => onRemove(character.character_id)}
+          >
+            Delete
+          </button>
+        </div>
+      </section>
+    </article>
   );
 }
 

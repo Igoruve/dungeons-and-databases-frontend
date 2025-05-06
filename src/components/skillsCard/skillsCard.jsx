@@ -1,8 +1,8 @@
 function SkillsCard({ data }) {
   return (
     <>
-      <p>{data.description}</p>
-      <p>Associated Stat: {data.associated_stat}</p>
+      <p className="text-white">{data.description}</p>
+      <p className="text-white">Associated Stat: {data.associated_stat}</p>
     </>
   );
 }

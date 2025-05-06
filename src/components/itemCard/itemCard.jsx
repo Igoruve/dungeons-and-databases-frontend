@@ -1,11 +1,15 @@
 function ItemCard({ data }) {
   return (
     <>
-      <p>{data.description}</p>
-      <p>Value: {data.value}</p>
-      <p>Type: {data.type}</p>
-      <p>Rarity: {data.rarity}</p>
-      <p>Magic Item: {data.magic === 1 ? "yes" : "no"}</p>
+      <article>
+        <p className="text-white">{data.description}</p>
+        <p className="text-white">Value: {data.value}</p>
+        <p className="text-white">Type: {data.type}</p>
+        <p className="text-white">Rarity: {data.rarity}</p>
+        <p className="text-white">
+          Magic Item: {data.magic === 1 ? "Yes" : "No"}
+        </p>
+      </article>
     </>
   );
 }
