@@ -12,6 +12,7 @@ const AuthContext = createContext({
 const AuthComponent = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const { onRouteChange } = useContext(RouteContext);
+  
   const handleLogin = async (email, password) => {
     const result = await login(email, password);
     if (result.error) {
@@ -27,7 +28,7 @@ const AuthComponent = ({ children }) => {
 
   const handleLogOut = () => {
     removeToken();
-    onRouteChange("home");
+    onRouteChange("login");
   };
 
   return (

@@ -79,10 +79,8 @@ function CharacterList() {
   }
 
   return (
-    <section className="flex flex-col space-y-4 py-10 bg-[--dark-bg-color] h-screen">
-      <h2 className="absolute text-white top-0 left-0 right-0 text-center py-4">
-        My Characters
-      </h2>
+    <section className="section-list">
+      <h2 className="h2-list">My Characters</h2>
       {error && <p>{error}</p>}
       {characters.length === 0 ? (
         <p>No characters found.</p>
@@ -96,7 +94,12 @@ function CharacterList() {
           />
         ))
       )}
-      <button className="bottom-0" onClick={handleCreateCharacter}>Create New Character</button>
+      <button
+        className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 absolute bottom-32  left-1/2 transform -translate-x-1/2"
+        onClick={handleCreateCharacter}
+      >
+        Create a Character
+      </button>
     </section>
   );
 }

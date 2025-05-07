@@ -11,14 +11,14 @@ function NotesList() {
   const [selectedNote, setSelectedNote] = useState(null);
 
   const { userData } = useContext(AuthContext);
-  const { onRouteChange } = useContext(RouteContext); 
+  const { onRouteChange } = useContext(RouteContext);
   useEffect(() => {
     if (!userData) {
-      onRouteChange("login"); 
+      onRouteChange("login");
     } else {
-      handleLoadNotes(); 
+      handleLoadNotes();
     }
-  }, [userData, onRouteChange]); 
+  }, [userData, onRouteChange]);
 
   const handleLoadNotes = async () => {
     try {
@@ -68,10 +68,8 @@ function NotesList() {
   }
 
   return (
-    <section className="flex flex-col space-y-4 py-10 bg-[--dark-bg-color] h-screen">
-      <h2 className="absolute text-white top-0 left-0 right-0 text-center py-4">
-        My Notes
-      </h2>
+    <section className="section-list">
+      <h2 className="h2-list">Campaing Notes</h2>
       {error && <p>{error}</p>}
       {notes.length === 0 ? (
         <p>No notes available</p>
@@ -85,7 +83,9 @@ function NotesList() {
           />
         ))
       )}
-      <button className="bottom-0">Create New Note</button>
+      <button className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 absolute bottom-32  left-1/2 transform -translate-x-1/2">
+        Create a Note
+      </button>
     </section>
   );
 }

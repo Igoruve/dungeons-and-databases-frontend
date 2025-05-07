@@ -73,17 +73,15 @@ function Browser() {
 
   return (
     <>
-      <section className="bg-[--primary-bg-color] min-h-screen py-10 mb-8">
-        <h2 className="absolute text-white top-0 left-0 right-0 text-center py-4">
-          Search
-        </h2>
-        <article className="w-100 px-4 py-8 flex flex-row min-h-40 gap-4 sticky top-0 bg-[--primary-bg-color] border-b">
+      <section className="bg-zinc-50 dark:bg-zinc-800 min-h-screen py-10 mb-8">
+        <h2 className="h2-list text-zinc-900 dark:text-zinc-100">Search</h2>
+        <article className=" py-8 flex flex-row min-h-40 gap-4 sticky top-0 bg-zinc-50 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 max-w-screen-lg mx-auto mb-4">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-row w-full justify-arround gap-4"
+            className="flex flex-row w-full justify-around gap-4 px-4"
           >
             <input
-              className="bg-white bg-opacity-10 rounded-md px-4 py-2 flex-grow"
+              className="bg-zinc-200 dark:bg-zinc-600 dark:bg-opacity-30 rounded-md px-4 py-2 flex-grow text-zinc-900 dark:text-zinc-100 shadow-inner"
               type="text"
               placeholder="Search all content..."
               required
@@ -94,7 +92,7 @@ function Browser() {
             />
             <button type="submit">
               <svg
-                className="w-6 h-6 mb-1 text-white"
+                className="w-6 h-6 mb-1 text-zinc-300 dark:text-zinc-100"
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
                 viewBox="0 -960 960 960"

@@ -2,14 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
-/* El resto de tu código CSS */
-
-.navbar-item {
-  @apply text-white uppercase px-4 py-2;
+:root {
+  --accent-color: #ef4444;
 }
 
-:root {
-  --dark-bg-color: #090809;
-  --primary-bg-color: #18181b;
-  --accent-color: #EF4444;
+.navbar {
+  @apply fixed bottom-0 z-10 bg-zinc-50 dark:bg-zinc-900 h-20 w-screen flex items-center justify-center;
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 -2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-ul {
+  @apply flex flex-wrap justify-center items-center h-full w-full gap-x-4 px-4;
+}
+
+.navbar-li {
+  @apply flex-1 flex justify-center items-center;
+}
+
+.navbar-item {
+  @apply text-zinc-700 dark:text-zinc-300 uppercase px-4 py-2;
+}
+
+.navbar-button {
+  @apply text-xs py-2 text-center flex flex-col justify-center items-center gap-1;
+}
+
+.section-card {
+  @apply w-full flex flex-row gap-4 border-zinc-200 dark:border-gray-500 border-b px-4;
+}
+
+.div-card {
+  @apply flex flex-col flex-1;
+}
+
+.div-card-button {
+  @apply flex flex-col items-end justify-start py-3;
+}
+
+.button-card {
+  @apply w-full text-red-500 text-center flex flex-col justify-center items-center text-4xl py-4 px-4 font-bold;
+}
+
+.section-list {
+  @apply flex flex-col space-y-4 py-10 bg-zinc-50 dark:bg-zinc-800 h-screen;
+}
+
+.h2-list {
+  @apply text-zinc-700 dark:text-zinc-300 absolute top-0 left-0 right-0 text-center py-4;
+}
+
+.h2-card {
+  @apply text-zinc-700 dark:text-zinc-300 text-lg pt-2 pb-4;
+}
+
+.par {
+  @apply text-zinc-700 dark:text-zinc-300 leading-relaxed pb-2;
+}
+
+.par-low-opacity {
+  @apply text-zinc-700 dark:text-zinc-300 dark:text-opacity-70 text-opacity-70 leading-relaxed pb-3;
+}
+
+.article-card-extended {
+  @apply bg-zinc-50 dark:bg-zinc-800 w-full content-start min-h-screen;
+}
+
+.section-card-extended {
+  @apply bg-zinc-50 dark:bg-zinc-800 px-10 py-20 flex flex-col min-h-screen;
+}
+
+.back-button {
+  @apply text-zinc-700 dark:text-zinc-300 absolute left-10 top-10 flex flex-row;
 }

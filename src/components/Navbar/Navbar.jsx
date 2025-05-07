@@ -5,18 +5,16 @@ import character from "../../assets/character.svg";
 
 function NavBar({ handleLogOut }) {
   const { route, onRouteChange } = useContext(RouteContext);
-  const baseButtonClasses =
-    "w-full text-xs py-2 text-center flex flex-col justify-center items-center gap-1";
 
   return (
-    <nav className="fixed bottom-0 z-10 bg-[--primary-bg-color] h-20 w-screen flex items-center justify-center border-b border-grey-500">
-      <ul className="flex flex-wrap justify-center items-center h-full w-full gap-x-4 px-4">
-        <li className="flex-1 flex justify-center items-center">
+    <nav className="navbar">
+      <ul className="navbar-ul">
+        <li className="navbar-li">
           <button
-            className={`${baseButtonClasses} ${
+            className={`navbar-button ${
               route === "characters"
                 ? "text-[--accent-color] font-bold"
-                : "text-white"
+                : "text-zinc-700"
             }`}
             onClick={() => onRouteChange("characters")}
           >
@@ -37,12 +35,12 @@ function NavBar({ handleLogOut }) {
             Characters
           </button>
         </li>
-        <li className="flex-1 flex justify-center items-center">
+        <li className="navbar-li">
           <button
-            className={`${baseButtonClasses} ${
+            className={`navbar-button ${
               route === "notes"
                 ? "text-[--accent-color] font-bold"
-                : "text-white"
+                : "text-zinc-700"
             }`}
             onClick={() => onRouteChange("notes")}
           >
@@ -63,12 +61,12 @@ function NavBar({ handleLogOut }) {
             Notes
           </button>
         </li>
-        <li className="flex-1 flex justify-center items-center">
+        <li className="navbar-li">
           <button
-            className={`${baseButtonClasses} ${
+            className={`navbar-button ${
               route === "browser"
                 ? "text-[--accent-color] font-bold"
-                : "text-white"
+                : "text-zinc-700"
             }`}
             onClick={() => onRouteChange("browser")}
           >
@@ -85,14 +83,14 @@ function NavBar({ handleLogOut }) {
             Search
           </button>
         </li>
-        <li className="flex-1 flex justify-center items-center">
+        <li className="navbar-li">
           <button
-            className={`${baseButtonClasses} ${
-              route === "login"
+            className={`navbar-button ${
+              route === "user"
                 ? "text-[--accent-color] font-bold"
-                : "text-white"
+                : "text-zinc-700"
             }`}
-            onClick={() => onRouteChange("login")}
+            onClick={() => onRouteChange("user")}
           >
             <svg
               className="w-6 h-6 mb-1"
@@ -110,7 +108,7 @@ function NavBar({ handleLogOut }) {
         {/*         <li className="flex-1">
           <button
             className={`${baseButtonClasses} ${
-              route === "login" ? "text-[--accent-color] font-bold" : "text-white"
+              route === "login" ? "text-[--accent-color] font-bold" : "text-zinc-700"
             }`}
             onClick={handleLogOut}
           >

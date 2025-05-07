@@ -9,9 +9,10 @@ import { login } from "./utils/auth.js";
 import { saveToken } from "./utils/localStorage.js";
 import RouteContext from "./context/RouterContext.jsx";
 import { AuthComponent } from "./context/AuthContext.jsx";
+import User from "./components/user/user.jsx";
 
 function App() {
-  const [route, setRoute] = useState("home");
+  const [route, setRoute] = useState("login");
 
   const handleRouteChange = (newRoute) => {
     setRoute(newRoute);
@@ -22,6 +23,7 @@ function App() {
     login: <Auth />,
     notes: <NotesList />,
     browser: <Browser />,
+    user: <User />,
   };
 
   return (

@@ -6,7 +6,7 @@ import SpeciesCard from "../SpeciesCard/SpeciesCard";
 
 function BrowserResults({ results }) {
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto px-4">
       {results.map((i) => {
         const key = `${i.type}-${
           i.data.class_id ||
@@ -18,16 +18,12 @@ function BrowserResults({ results }) {
 
         return (
           <article
-            className="w-100 bg-[--primary-bg-color] mx-4 min-h-40 gap-4 rounded-md mb-4"
+            className="w-full bg-zinc-100 dark:bg-zinc-800 min-h-40 gap-4 rounded-md mb-4 border border-zinc-200 dark:border-zinc-700"
             key={key}
           >
-          
             {i.type === "class" && <ClassCard data={i.data} />}
-
             {i.type === "items" && <ItemCard data={i.data} />}
-
             {i.type === "skills" && <SkillsCard data={i.data} />}
-
             {i.type === "species" && <SpeciesCard data={i.data} />}
           </article>
         );

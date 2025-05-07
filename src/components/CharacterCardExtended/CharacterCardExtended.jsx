@@ -48,21 +48,29 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
   }, [character.character_id]);
 
   return (
-    <article className="article character">
-      <section className="character-data">
+    <article className="article-card-extended">
+      <section className="section-card-extended">
+        <button className="back-button" onClick={() => onSelect()}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="currentColor"
+          >
+            <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+          </svg>
+          Back
+        </button>
         <h1>
           {character.first_name} {character.last_name}
         </h1>
-        <p className="character-level">Level: {character.level}</p>
-        <p className="character-initiative">
+        <p>Level: {character.level}</p>
+        <p>
           Initiative: {stats && stats[0] ? stats[0].Dexterity : "Loading..."}
         </p>
-        <p className="character-species">
-          Species: {species[0]?.name || "Loading..."}
-        </p>
-        <p className="character-class">
-          Class: {classInfo[0]?.name || "Loading..."}
-        </p>
+        <p>Species: {species[0]?.name || "Loading..."}</p>
+        <p>Class: {classInfo[0]?.name || "Loading..."}</p>
         <p>Proficiency bonus: + {Math.ceil(character.level / 4 + 1)}</p>
         <p>Speed: {species[0]?.speed || "Loading..."}</p>
       </section>
@@ -83,8 +91,15 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
       )}
 
       <button onClick={() => onSelect()}>Back</button>
-      <button>Edit Character</button>
-      <button onClick={() => onRemove(character.character_id)}>Delete</button>
+      <button className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 mb-4 mt-2">
+        Edit Character
+      </button>
+      <button
+        className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 mb-4"
+        onClick={() => onRemove(character.character_id)}
+      >
+        Delete
+      </button>
     </article>
   );
 }

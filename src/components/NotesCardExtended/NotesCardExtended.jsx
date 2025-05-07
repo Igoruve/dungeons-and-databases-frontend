@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
 
 function NotesCardExtended({ notes, onRemove, onSelect }) {
-  const baseButtonClasses =
-    "w-full text-white py-2 flex flex-col justify-start items-start";
   return (
-    <article className="bg-[--dark-bg-color] w-full content-start min-h-screen">
-      <section className="w-100 bg-[--primary-bg-color] px-10 py-20 flex flex-col min-h-screen">
-        <button
-          className="text-white absolute left-10 top-10 flex flex-row"
-          onClick={() => onSelect()}
-        >
+    <article className="article-card-extended">
+      <section className="section-card-extended">
+        <button className="back-button" onClick={() => onSelect()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
@@ -21,14 +16,21 @@ function NotesCardExtended({ notes, onRemove, onSelect }) {
           </svg>
           Back
         </button>
-        <h2 className="text-white text-xl font-bold py-4">{notes.title}</h2>
-        <p className="text-white py-2 text-opacity-70">
+        <h2 className="text-zinc-800 text-xl font-bold py-4">{notes.title}</h2>
+        <p className="par-low-opacity">
           <strong>Creation Date:</strong>{" "}
           {new Date(notes.created_at).toLocaleDateString("es-ES")}
         </p>
-        <p className="text-white leading-relaxed">{notes.description}</p>
-        <button>Edit Note</button>
-        <button onClick={() => onRemove(character.character_id)}>Delete</button>
+        <p className="par">{notes.description}</p>
+        <button className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 mb-4 mt-2">
+          Edit Note
+        </button>
+        <button
+          className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 mb-4"
+          onClick={() => onRemove(character.character_id)}
+        >
+          Delete
+        </button>
       </section>
     </article>
   );
