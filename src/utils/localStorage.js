@@ -39,4 +39,4 @@ function removeUser() {
   removeFromLocalStorage("user");
 }
 
-export { saveToken, getToken, removeToken, saveUser, getUser, removeUser };
+export { saveToLocalStorage, getFromLocalStorage, saveToken, getToken, removeToken, saveUser, getUser, removeUser };

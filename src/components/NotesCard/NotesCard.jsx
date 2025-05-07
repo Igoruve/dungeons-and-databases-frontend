@@ -1,7 +1,7 @@
 function NotesCard({ notes, onSelect, onRemove }) {
   return (
     <article className="w-full content-start">
-      <section className="bg-zinc-200 dark:bg-zinc-800 px-4 py-3 mx-4 flex flex-row min-h-40 gap-4 rounded-md">
+      <section className="bg-zinc-200 dark:bg-zinc-800 px-4 py-3 mx-4 flex flex-row min-h-40 gap-4 rounded-md shadow-md">
         <div className="div-card">
           <h2 className="h2-card text-zinc-900 dark:text-zinc-100">
             <strong>{notes.title}</strong>

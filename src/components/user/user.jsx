@@ -2,13 +2,19 @@ import { useEffect, useState, useContext } from "react";
 import { getUserById } from "../../utils/user";
 import { AuthContext } from "../../context/AuthContext";
 import RouteContext from "../../context/RouterContext";
+import {
+  saveToLocalStorage,
+  getFromLocalStorage,
+} from "../../utils/localStorage";
 
 function UserCard() {
   const classText = "text-zinc-700 dark:text-zinc-300 leading-relaxed pb-2";
 
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    return getFromLocalStorage("theme") === "dark";
+  });
 
   const { userData, onLogout } = useContext(AuthContext);
   const { onRouteChange } = useContext(RouteContext);
@@ -22,7 +28,9 @@ function UserCard() {
   }, [darkMode]);
 
   const handleDarkMode = () => {
-    setDarkMode(!darkMode);
+    const newMode = !darkMode;
+    saveToLocalStorage("theme", newMode ? "dark" : "light");
+    setDarkMode(newMode);
   };
 
   useEffect(() => {
@@ -52,7 +60,7 @@ function UserCard() {
   };
 
   return (
-    <article className="bg-zinc-100 dark:bg-zinc-800 min-h-screen py-10 mb-8 text-center">
+    <article className="relative bg-zinc-100 dark:bg-zinc-800 min-h-screen py-10 mb-8 text-center">
       <section className="mt-10 h-full">
         <div>
           {error && <p className="text-red-500">{error}</p>}
@@ -62,12 +70,10 @@ function UserCard() {
               <h2 className="text-zinc-900 dark:text-zinc-300 text-center py-4 mt-4 text-3xl">
                 <strong>{`${user.first_name} ${user.last_name}`}</strong>
               </h2>
-              <p className={`${classText} text-center text-xl pb-24`}>
+              <p className={`${classText} text-center text-xl`}>
                 "{user.nickname}"
               </p>
-              <p className={`${classText} text-center mb-24`}>
-                Email: {user.email}
-              </p>
+              <p className={`${classText} text-center`}>Email: {user.email}</p>
             </>
           ) : (
             <p className="text-zinc-700 dark:text-zinc-300">
@@ -75,13 +81,31 @@ function UserCard() {
             </p>
           )}
         </div>
-        <div className="flex justify-center">
-          <button onClick={handleDarkMode} className="">
-            Dark Theme
-          </button>
+        <div className="flex flex-col justify-center pt-16 gap-6">
+          <h2 className="h2-card">Settings</h2>
+          <div className="flex flex-row px-20 justify-between items-center">
+            <p className={`${darkMode ? "text-zinc-50" : "text-zinc-900"}`}>
+              {darkMode ? "Ligth Theme" : "Dark Theme"}
+            </p>
+            <label
+              htmlFor="checkbox"
+              className={`${
+                darkMode
+                  ? "bg-red-500 border-zinc-50"
+                  : "bg-zinc-50 border-red-500 "
+              } w-6 h-6 border rounded-lg shadow-md`}
+            ></label>
+            <input
+              id="checkbox"
+              name="checkbox"
+              type="checkbox"
+              onClick={handleDarkMode}
+              className="hidden"
+            />
+          </div>
           <button
             onClick={onLogout}
-            className="px-4 py-2 border border-[var(--accent-color)] rounded-md mx-auto text-[var(--accent-color)] text-center bottom-24"
+            className="px-4 py-2 border border-[var(--accent-color)] rounded-md text-[var(--accent-color)] text-center absolute bottom-24 left-1/2 transform -translate-x-1/2"
           >
             Log Out...
           </button>
