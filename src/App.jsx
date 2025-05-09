@@ -10,6 +10,7 @@ import { saveToken } from "./utils/localStorage.js";
 import RouteContext from "./context/RouterContext.jsx";
 import { AuthComponent } from "./context/AuthContext.jsx";
 import User from "./components/user/user.jsx";
+import NewNote from "./components/NewNote/NewNote.jsx";
 
 function App() {
   const [route, setRoute] = useState("login");
@@ -24,6 +25,7 @@ function App() {
     notes: <NotesList />,
     browser: <Browser />,
     user: <User />,
+    createNote: <NewNote />
   };
 
   return (

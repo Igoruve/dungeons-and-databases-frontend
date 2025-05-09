@@ -73,8 +73,8 @@ function Browser() {
 
   return (
     <>
-      <section className="bg-zinc-50 dark:bg-zinc-800 min-h-screen py-10 mb-8">
-        <h2 className="h2-list text-zinc-900 dark:text-zinc-100">Search</h2>
+      <section className="bg-zinc-100 dark:bg-zinc-800 min-h-screen py-10 mb-8">
+        <h2 className="bg-zinc-50 dark:bg-zinc-800 h2-list text-zinc-900 dark:text-zinc-100">Search</h2>
         <article className=" py-8 flex flex-row min-h-40 gap-4 sticky top-0 bg-zinc-50 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 max-w-screen-lg mx-auto mb-4">
           <form
             onSubmit={handleSubmit}
@@ -97,7 +97,7 @@ function Browser() {
                 height="24px"
                 viewBox="0 -960 960 960"
                 width="24px"
-                fill="currentColor"
+                fill="#ef4444"
               >
                 <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
               </svg>

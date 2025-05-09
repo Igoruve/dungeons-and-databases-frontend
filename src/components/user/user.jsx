@@ -66,7 +66,7 @@ function UserCard() {
           {error && <p className="text-red-500">{error}</p>}
           {user ? (
             <>
-              <div className="w-20 h-20 border border-[var(--accent-color)] rounded-md mx-auto bg-zinc-200 dark:bg-zinc-900"></div>
+              <div className="w-20 h-20 border border-[var(--accent-color)] rounded-md mx-auto bg-zinc-200 dark:bg-zinc-900 shadow-md"></div>
               <h2 className="text-zinc-900 dark:text-zinc-300 text-center py-4 mt-4 text-3xl">
                 <strong>{`${user.first_name} ${user.last_name}`}</strong>
               </h2>
@@ -85,7 +85,7 @@ function UserCard() {
           <h2 className="h2-card">Settings</h2>
           <div className="flex flex-row px-20 justify-between items-center">
             <p className={`${darkMode ? "text-zinc-50" : "text-zinc-900"}`}>
-              {darkMode ? "Ligth Theme" : "Dark Theme"}
+              Dark Theme
             </p>
             <label
               htmlFor="checkbox"
@@ -105,7 +105,7 @@ function UserCard() {
           </div>
           <button
             onClick={onLogout}
-            className="px-4 py-2 border border-[var(--accent-color)] rounded-md text-[var(--accent-color)] text-center absolute bottom-24 left-1/2 transform -translate-x-1/2"
+            className="px-4 py-2 border border-[var(--accent-color)] rounded-md text-[var(--accent-color)] text-center absolute bottom-24 left-1/2 transform -translate-x-1/2 font-bold bg-white"
           >
             Log Out...
           </button>

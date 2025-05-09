@@ -8,7 +8,8 @@
 
 .navbar {
   @apply fixed bottom-0 z-10 bg-zinc-50 dark:bg-zinc-900 h-20 w-screen flex items-center justify-center;
-  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 -4px 6px -1px rgba(0, 0, 0, 0.1),
     0 -2px 4px -2px rgba(0, 0, 0, 0.1);
 }
 
@@ -29,7 +30,7 @@
 }
 
 .section-card {
-  @apply w-full flex flex-row gap-4 border-zinc-200 dark:border-gray-500 border-b px-4;
+  @apply w-full flex flex-row gap-4 px-4;
 }
 
 .div-card {
@@ -41,11 +42,11 @@
 }
 
 .button-card {
-  @apply w-full text-red-500 text-center flex flex-col justify-center items-center text-4xl py-4 px-4 font-bold;
+  @apply w-full text-red-500 text-center flex flex-col justify-center items-center text-4xl py-4 pl-4 font-bold;
 }
 
 .section-list {
-  @apply flex flex-col space-y-4 py-10 bg-zinc-50 dark:bg-zinc-800 h-screen;
+  @apply flex flex-col space-y-4 py-10 bg-zinc-50 dark:bg-zinc-800 min-h-screen pb-32;
 }
 
 .h2-list {
@@ -53,15 +54,20 @@
 }
 
 .h2-card {
-  @apply text-zinc-700 dark:text-zinc-300 text-lg pt-2 pb-4;
+  @apply text-zinc-700 dark:text-zinc-300 text-lg;
+}
+
+.h2-card-browser {
+  @apply text-zinc-700 dark:text-zinc-300 text-lg py-4;
 }
 
 .par {
-  @apply text-zinc-700 dark:text-zinc-300 leading-relaxed pb-2;
+  @apply text-zinc-700 dark:text-zinc-300 leading-relaxed pb-2 
+         whitespace-pre-wrap break-words w-full max-w-full;
 }
 
 .par-low-opacity {
-  @apply text-zinc-700 dark:text-zinc-300 dark:text-opacity-70 text-opacity-70 leading-relaxed pb-3;
+  @apply text-zinc-700 dark:text-zinc-300 dark:text-opacity-70 text-opacity-70 leading-relaxed;
 }
 
 .article-card-extended {
@@ -69,9 +75,65 @@
 }
 
 .section-card-extended {
-  @apply bg-zinc-50 dark:bg-zinc-800 px-10 py-20 flex flex-col min-h-screen;
+  @apply bg-zinc-50 dark:bg-zinc-800 px-10 pt-16 pb-20 flex flex-col min-h-screen;
+}
+
+.div-card-extended {
+  @apply flex flex-col justify-end items-end pr-4 py-4 bg-zinc-200 dark:bg-zinc-600 shadow-md fixed w-full z-10;
 }
 
 .back-button {
-  @apply text-zinc-700 dark:text-zinc-300 absolute left-10 top-10 flex flex-row;
+  @apply text-red-500 absolute left-6 top-6 flex flex-row;
+}
+
+.grid-square {
+  @apply flex flex-col items-center border border-zinc-500 rounded-md bg-zinc-200 dark:bg-zinc-700 shadow-md;
+}
+
+.grid-scnd-square {
+  @apply flex flex-col justify-center items-center bg-zinc-200 dark:bg-zinc-700 py-2 shadow-inner rounded-md w-full max-w-[80px] text-center;
+}
+
+.grid-h3 {
+  @apply text-sm text-zinc-900 dark:text-zinc-100 leading-tight pb-2;
+}
+
+.grid-par {
+  @apply text-zinc-900 dark:text-zinc-100 text-xl;
+}
+
+.grid-2 {
+  @apply flex flex-col items-center justify-center text-center;
+}
+
+.grid-stat {
+  @apply text-lg text-zinc-900 dark:text-zinc-100;
+}
+
+.grid-first-num {
+  @apply bg-zinc-50 dark:bg-zinc-800 border border-zinc-500 rounded-md text-2xl text-zinc-900 dark:text-zinc-100 w-16 h-14 flex justify-center items-center;
+}
+
+.grid-sec-num {
+  @apply bg-zinc-50 dark:bg-zinc-800 w-10 my-2 px-2 rounded-full flex items-center justify-center border border-zinc-500 text-zinc-900 dark:text-zinc-100;
+}
+
+.par-card-extended {
+  @apply text-zinc-900 dark:text-zinc-200 text-opacity-70;
+}
+
+.form-input {
+  @apply bg-zinc-200 dark:bg-zinc-600 dark:bg-opacity-30 rounded-md px-4 py-2 flex-grow text-zinc-900 dark:text-zinc-100 shadow-inner w-full resize-none;
+}
+
+.form-button {
+  @apply bg-red-500 dark:bg-red-600 text-zinc-100  shadow-md w-full my-4 rounded-md py-2;
+}
+
+.edit-form-input {
+  @apply bg-zinc-200 dark:bg-zinc-600 dark:bg-opacity-30 rounded-md px-4 py-2 text-zinc-900 dark:text-zinc-100 shadow-inner resize-none min-h-[100px] h-auto;
+}
+
+.create-button {
+  @apply flex flex-row px-2 py-2 fixed bottom-24 left-1/2 transform -translate-x-1/2 text-zinc-50 text-lg bg-zinc-50/20 rounded-full shadow-md backdrop-blur-sm;
 }

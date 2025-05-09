@@ -51,8 +51,8 @@ function Auth() {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 640 512"
-        width="42px"
-        height="42px"
+        width="64px"
+        height="64px"
         className="text-[var(--accent-color)] absolute top-16"
         fill="currentColor"
       >

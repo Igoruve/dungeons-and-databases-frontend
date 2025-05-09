@@ -83,7 +83,9 @@ function CharacterList() {
       <h2 className="h2-list">My Characters</h2>
       {error && <p>{error}</p>}
       {characters.length === 0 ? (
-        <p>No characters found.</p>
+        <p className="text-red-500 px-6 justify-center items-center ">
+          No characters found.
+        </p>
       ) : (
         characters.map((character) => (
           <CharacterCard
@@ -94,11 +96,16 @@ function CharacterList() {
           />
         ))
       )}
-      <button
-        className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 absolute bottom-32  left-1/2 transform -translate-x-1/2"
-        onClick={handleCreateCharacter}
-      >
-        Create a Character
+      <button className="create-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="48px"
+          viewBox="0 -960 960 960"
+          width="48px"
+          fill="#ef4444"
+        >
+          <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+        </svg>
       </button>
     </section>
   );

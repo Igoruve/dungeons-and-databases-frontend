@@ -17,15 +17,18 @@ function BrowserResults({ results }) {
         }-${i.data.name || "unknown"}`;
 
         return (
-          <article
-            className="w-full bg-zinc-100 dark:bg-zinc-800 min-h-40 gap-4 rounded-md mb-4 border border-zinc-200 dark:border-zinc-700"
-            key={key}
-          >
-            {i.type === "class" && <ClassCard data={i.data} />}
-            {i.type === "items" && <ItemCard data={i.data} />}
-            {i.type === "skills" && <SkillsCard data={i.data} />}
-            {i.type === "species" && <SpeciesCard data={i.data} />}
-          </article>
+          <>
+            <section
+              className="w-full bg-zinc-100 dark:bg-zinc-800 min-h-40 gap-4 rounded-md mb-4"
+              key={key}
+            >
+              {i.type === "class" && <ClassCard data={i.data} />}
+              {i.type === "items" && <ItemCard data={i.data} />}
+              {i.type === "skills" && <SkillsCard data={i.data} />}
+              {i.type === "species" && <SpeciesCard data={i.data} />}
+            </section>
+            <hr className="border-t border-zinc-500 w-full" />
+          </>
         );
       })}
     </div>

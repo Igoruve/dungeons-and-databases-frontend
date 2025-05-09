@@ -12,7 +12,7 @@ const AuthContext = createContext({
 const AuthComponent = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const { onRouteChange } = useContext(RouteContext);
-  
+
   const handleLogin = async (email, password) => {
     const result = await login(email, password);
     if (result.error) {
@@ -21,7 +21,7 @@ const AuthComponent = ({ children }) => {
       console.log("login", result);
       setUserData(result.user);
       saveToken(result.token);
-      onRouteChange("home");
+      onRouteChange("notes");
       return null;
     }
   };
@@ -32,7 +32,7 @@ const AuthComponent = ({ children }) => {
   };
 
   return (
-    <AuthContext
+    <AuthContext.Provider
       value={{
         userData: userData,
         onLogin: handleLogin,
@@ -40,7 +40,7 @@ const AuthComponent = ({ children }) => {
       }}
     >
       {children}
-    </AuthContext>
+    </AuthContext.Provider>
   );
 };
 

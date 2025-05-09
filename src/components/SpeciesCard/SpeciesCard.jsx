@@ -4,19 +4,19 @@ function SpeciesCard({ data }) {
       <article>
         <section className="section-card">
           <div className="div-card">
-            <h2 className="h2-card">
+            <h2 className="h2-card-browser">
               <strong>{data.name}</strong>
             </h2>
             <p className="par">
-              <strong>Creature Type: </strong>
+              Creature Type:
               {data.creature_type}.
             </p>
             <p className="par">
-              <strong>Size: </strong>
+              Size:
               {data.size}.
             </p>
             <p className="par">
-              <strong>Speed: </strong>
+              Speed:
               {data.speed} ft.
             </p>
           </div>

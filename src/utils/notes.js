@@ -15,9 +15,22 @@ async function getNotesByUserId(user_id) {
   return response;
 }
 
-async function createNotes(data) {
-  const response = await FetchData("/notes", "POST");
+async function createNotes(notesData) {
+  try {
+    console.log("Creating note with data:", notesData);
+    if (!notesData.title || !notesData.description || !notesData.user_id) {
+      throw new Error("Missing required fields for note creation");
+    }
+    return await FetchData("/notes", "POST", notesData);
+  } catch (error) {
+    console.error("Error creating note:", error);
+    return { error: error.message };
+  }
+}
+
+async function editNotes(notes_id, data){
+  const response = await FetchData(`/notes/${notes_id}`, "PUT", data);
   return response;
 }
 
-export { getAllNotes, deleteNotes, createNotes, getNotesByUserId };
+export { getAllNotes, deleteNotes, createNotes, getNotesByUserId, editNotes };

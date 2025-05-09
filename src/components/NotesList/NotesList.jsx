@@ -1,9 +1,9 @@
 import NotesCard from "../NotesCard/NotesCard";
 import { useEffect, useState, useContext } from "react";
-import { getNotesByUserId, deleteNotes } from "../../utils/notes";
+import { getNotesByUserId, deleteNotes, editNotes } from "../../utils/notes";
 import NotesCardExtended from "../NotesCardExtended/NotesCardExtended";
-import { AuthContext } from "../../context/AuthContext"; // Importar AuthContext
-import RouteContext from "../../context/RouterContext"; // Importar RouteContext
+import { AuthContext } from "../../context/AuthContext";
+import RouteContext from "../../context/RouterContext";
 
 function NotesList() {
   const [notes, setNotes] = useState([]);
@@ -57,11 +57,34 @@ function NotesList() {
     }
   };
 
+  const handleEditNote = async (notes_id, data) => {
+    try {
+      const response = await editNotes(notes_id, data);
+      if (response.error) {
+        setError(`Error editing note: ${response.error}`);
+      } else {
+        setNotes((prevNotes) =>
+          prevNotes.map((note) =>
+            note.notes_id === notes_id ? { ...note, ...data } : note
+          )
+        );
+        setSelectedNote(null);
+      }
+    } catch (err) {
+      setError(`Failed to delete note: ${err.message}`);
+    }
+  };
+
+  const handleCreateNote = () => {
+    onRouteChange("createNote");
+  };
+
   if (selectedNote) {
     return (
       <NotesCardExtended
         notes={selectedNote}
         onRemove={handleRemoveNote}
+        onChange={handleEditNote}
         onSelect={() => setSelectedNote(null)}
       />
     );
@@ -72,7 +95,9 @@ function NotesList() {
       <h2 className="h2-list">Campaing Notes</h2>
       {error && <p>{error}</p>}
       {notes.length === 0 ? (
-        <p>No notes available</p>
+        <p className="text-red-500 px-6 justify-center items-center ">
+          No notes available.
+        </p>
       ) : (
         notes.map((note) => (
           <NotesCard
@@ -83,8 +108,19 @@ function NotesList() {
           />
         ))
       )}
-      <button className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 absolute bottom-32  left-1/2 transform -translate-x-1/2">
-        Create a Note
+      <button
+        className="create-button"
+        onClick={handleCreateNote}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="48px"
+          viewBox="0 -960 960 960"
+          width="48px"
+          fill="#ef4444"
+        >
+          <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+        </svg>
       </button>
     </section>
   );

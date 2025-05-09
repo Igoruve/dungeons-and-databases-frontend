@@ -14,7 +14,7 @@ function NavBar({ handleLogOut }) {
             className={`navbar-button ${
               route === "characters"
                 ? "text-[--accent-color] font-bold"
-                : "text-zinc-700"
+                : "text-zinc-700 dark:text-zinc-100"
             }`}
             onClick={() => onRouteChange("characters")}
           >
@@ -40,7 +40,7 @@ function NavBar({ handleLogOut }) {
             className={`navbar-button ${
               route === "notes"
                 ? "text-[--accent-color] font-bold"
-                : "text-zinc-700"
+                : "text-zinc-700 dark:text-zinc-100"
             }`}
             onClick={() => onRouteChange("notes")}
           >
@@ -66,7 +66,7 @@ function NavBar({ handleLogOut }) {
             className={`navbar-button ${
               route === "browser"
                 ? "text-[--accent-color] font-bold"
-                : "text-zinc-700"
+                : "text-zinc-700 dark:text-zinc-100"
             }`}
             onClick={() => onRouteChange("browser")}
           >
@@ -88,7 +88,7 @@ function NavBar({ handleLogOut }) {
             className={`navbar-button ${
               route === "user"
                 ? "text-[--accent-color] font-bold"
-                : "text-zinc-700"
+                : "text-zinc-700 dark:text-zinc-100"
             }`}
             onClick={() => onRouteChange("user")}
           >
