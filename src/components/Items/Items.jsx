@@ -12,10 +12,13 @@ function ItemsCard({ item }) {
   }
 
   return (
-    <section>
-      <p>
-        {item.name} ({quantity})
-      </p>
+    <section className="grid grid-cols-2 gap-2 max-w-md mx-auto py-2 px-4">
+      <div className="flex items-center justify-center">
+        <p className="skills-section-text">{item.name}</p>
+      </div>
+      <div className="flex items-center justify-center">
+        <p className="skills-section-text">{quantity}</p>
+      </div>
     </section>
   );
 }

@@ -48,7 +48,7 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
   }, [character.character_id]);
 
   return (
-    <section className="article-card-extended">
+    <section className="article-card-extended pb-28">
       <div className="div-card-extended">
         <h1 className="text-zinc-900 dark:text-zinc-100 text-xl pb-2">
           {character.first_name} {character.last_name}
@@ -140,44 +140,46 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
       </article>
 
       {stats ? <StatsCard stats={stats[0]} /> : <p>Loading...</p>}
-      
-      
-      {skills && skills.length > 0 ? (
-        skills.map((skill) => {
-          const statValue = stats[0][skill.associated_stat];
-          return (
-            <SkillsCard
-              key={skill.skill_id}
-              skill={skill}
-              statValue={statValue}
-            />
-          );
-        })
-      ) : (
-        <p>No skills found.</p>
-      )}
 
-      {money ? <MoneyCard money={money} /> : <p>Loading..</p>}
+      <section className=" mx-4 max-w-md">
+        <div className="grid grid-cols-3 gap-2 border-b border-red-500 py-2 px-4">
+          <h3 className="skills-section-text text-center">MOD.</h3>
+          <h3 className="skills-section-text text-center">SKILL</h3>
+          <h3 className="skills-section-text text-center">BONUS</h3>
+        </div>
+        {skills && skills.length > 0 ? (
+          skills.map((skill) => {
+            const statValue = stats[0][skill.associated_stat];
+            return (
+              <SkillsCard
+                key={skill.skill_id}
+                skill={skill}
+                statValue={statValue}
+              />
+            );
+          })
+        ) : (
+          <p className="px-4 py-2">No skills found.</p>
+        )}
+      </section>
 
-      <h3>Items</h3>
-      {items && items.length > 0 ? (
-        items.map((item) => (
-          <ItemsCard key={item.item_id} item={item} character={character} />
-        ))
-      ) : (
-        <p>No items found.</p>
-      )}
-
-      <button onClick={() => onSelect()}>Back</button>
-      <button className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 mb-4 mt-2">
-        Edit Character
-      </button>
-      <button
-        className="border border-red-500 rounded-md flex flex-row justify-center px-4 py-2 mb-4"
-        onClick={() => onRemove(character.character_id)}
-      >
-        Delete
-      </button>
+      <section className="mt-4">
+        <div className="grid grid-cols-2 gap-2 max-w-md mx-4 py-2 px-4 border-b border-red-500">
+          <h3 className="skills-section-text text-center">ITEM</h3>
+          <h3 className="skills-section-text text-center">QTY.</h3>
+        </div>
+        {items && items.length > 0 ? (
+          items.map((item) => (
+            <ItemsCard key={item.item_id} item={item} character={character} />
+          ))
+        ) : (
+          <p>No items found.</p>
+        )}
+        <section className="items-center justify-center mt-2">
+          <h3 className="skills-section-text px-4">MONEY</h3>
+          {money ? <MoneyCard money={money} /> : <p>Loading..</p>}
+        </section>
+      </section>
     </section>
   );
 }

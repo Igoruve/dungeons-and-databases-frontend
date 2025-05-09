@@ -2,15 +2,20 @@ function SkillsCard({ skill, statValue }) {
   const bonus = Math.floor((statValue - 10) / 2);
 
   return (
-    <section className="flex flex-row justify-between mx-4 border-b border-zinc-700 py-4 items-center">
-      <p className="text-zinc-900 dark:text-zinc-100">
-        {skill.associated_stat}
-      </p>
-      <p className="text-zinc-900 dark:text-zinc-100">{skill.name}</p>
-      <p className="text-zinc-900 dark:text-zinc-100">
-        {bonus >= 1 ? `+${bonus}` : bonus}
-      </p>
+    <section className="grid grid-cols-3 gap-2 max-w-md mx-auto py-2 px-4">
+      <div className="flex items-center justify-center">
+        <p className="skills-section-text">{skill.associated_stat}</p>
+      </div>
+      <div className="flex items-center justify-center">
+        <p className="skills-section-text">{skill.name}</p>
+      </div>
+      <div className="flex items-center justify-center">
+        <div className="skills-section-text border border-zinc-500 rounded-md px-2 min-w-[40px] text-center">
+          {bonus >= 1 ? `+${bonus}` : bonus}
+        </div>
+      </div>
     </section>
   );
 }
+
 export default SkillsCard;

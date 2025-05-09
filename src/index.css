@@ -87,7 +87,7 @@
 }
 
 .grid-square {
-  @apply flex flex-col items-center border border-zinc-500 rounded-md bg-zinc-200 dark:bg-zinc-700 shadow-md;
+  @apply flex flex-col items-center border border-zinc-500 rounded-md bg-red-100 dark:bg-zinc-700 shadow-md;
 }
 
 .grid-scnd-square {
@@ -136,4 +136,8 @@
 
 .create-button {
   @apply flex flex-row px-2 py-2 fixed bottom-24 left-1/2 transform -translate-x-1/2 text-zinc-50 text-lg bg-zinc-50/20 rounded-full shadow-md backdrop-blur-sm;
+}
+
+.skills-section-text{
+  @apply text-zinc-900 dark:text-zinc-100;
 }
