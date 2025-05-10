@@ -16,7 +16,7 @@ async function deleteCharacter(id) {
 }
 
 async function createCharacter(data) {
-  const response = await FetchData("/character", "POST");
+  const response = await FetchData("/character", "POST", data);
   return response;
 }
 

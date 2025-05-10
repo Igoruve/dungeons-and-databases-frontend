@@ -75,15 +75,15 @@
 }
 
 .section-card-extended {
-  @apply bg-zinc-50 dark:bg-zinc-800 px-10 pt-16 pb-20 flex flex-col min-h-screen;
+  @apply bg-zinc-50 dark:bg-zinc-800 px-10 pt-20 pb-20 flex flex-col min-h-screen;
 }
 
 .div-card-extended {
-  @apply flex flex-col justify-end items-end pr-4 py-4 bg-zinc-200 dark:bg-zinc-600 shadow-md fixed w-full z-10;
+  @apply flex flex-col justify-end items-end py-4  w-full;
 }
 
 .back-button {
-  @apply text-red-500 absolute left-6 top-6 flex flex-row;
+  @apply text-red-500 left-8 top-8 flex flex-row p-2 fixed items-center justify-center z-20;
 }
 
 .grid-square {
@@ -127,7 +127,11 @@
 }
 
 .form-button {
-  @apply bg-red-500 dark:bg-red-600 text-zinc-100  shadow-md w-full my-4 rounded-md py-2;
+  @apply bg-gradient-to-r from-red-500 to-fuchsia-500 text-shadow-md text-zinc-100  shadow-md w-full my-4 rounded-2xl py-2;
+}
+
+.delete-confirm-button{
+  @apply bg-gradient-to-r from-red-500 to-fuchsia-500 text-shadow-md text-white px-4 py-2 rounded-2xl;
 }
 
 .edit-form-input {
@@ -135,9 +139,9 @@
 }
 
 .create-button {
-  @apply flex flex-row px-2 py-2 fixed bottom-24 left-1/2 transform -translate-x-1/2 text-zinc-50 text-lg bg-zinc-50/20 rounded-full shadow-md backdrop-blur-sm;
+  @apply flex flex-row px-2 py-2 fixed bottom-24 left-1/2 transform -translate-x-1/2 text-zinc-50 text-lg bg-gradient-to-r from-red-500 to-fuchsia-500 text-shadow-md rounded-full shadow-md backdrop-blur-sm;
 }
 
-.skills-section-text{
+.skills-section-text {
   @apply text-zinc-900 dark:text-zinc-100;
 }

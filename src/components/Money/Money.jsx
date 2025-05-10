@@ -1,6 +1,6 @@
 function MoneyCard({ money }) {
   return (
-    <section className="grid grid-cols-2 gap-4 max-w-md mx-auto py-2 px-4">
+    <section className="grid grid-cols-2 gap-4 max-w-md mx-auto py-2 px-10">
       <div className="flex flex-col">
         <div className="flex justify-around border border-zinc-500 px-2 py-1 rounded-md">
           <p

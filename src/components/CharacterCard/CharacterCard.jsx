@@ -1,4 +1,18 @@
-function CharacterCard({ character, onRemove, onSelect }) {
+const CharacterCard = ({ character, onRemove, onSelect }) => {
+  // Verificar que las propiedades existan antes de acceder a ellas
+  const className =
+    character.class && character.class[0]
+      ? character.class[0].name
+      : "Unknown Class";
+  const speciesName =
+    character.species && character.species[0]
+      ? character.species[0].name
+      : "Unknown Species";
+  const skillNames =
+    character.skill && character.skill.length > 0
+      ? character.skill.map((s) => s.name).join(", ")
+      : "No Skills";
+
   return (
     <article className="w-full content-start">
       <section className="bg-zinc-200 dark:bg-zinc-700 px-4 py-3 mx-4 flex flex-row min-h-40 gap-4 rounded-md shadow-md">
@@ -9,8 +23,8 @@ function CharacterCard({ character, onRemove, onSelect }) {
             </strong>
           </h2>
           <p className="par-low-opacity text-zinc-800 dark:text-zinc-200">
-            {character.class[0].name} {character.species[0].name} Level {character.level}
-            </p>
+            {className} {speciesName} Level {character.level}
+          </p>
         </div>
         <div className="flex flex-col items-end justify-start">
           <button className="button-card" onClick={() => onSelect()}>
@@ -28,6 +42,6 @@ function CharacterCard({ character, onRemove, onSelect }) {
       </section>
     </article>
   );
-}
+};
 
 export default CharacterCard;

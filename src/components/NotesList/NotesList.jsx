@@ -30,7 +30,10 @@ function NotesList() {
           setError(`Error loading notes: ${data.error}`);
         }
       } else if (Array.isArray(data)) {
-        setNotes(data);
+        const sortedNotes = data.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+        setNotes(sortedNotes);
       } else {
         setError("Invalid data format received from server");
         setNotes([]);
@@ -68,7 +71,9 @@ function NotesList() {
             note.notes_id === notes_id ? { ...note, ...data } : note
           )
         );
-        setSelectedNote(null);
+        setSelectedNote((prevNote) =>
+          prevNote?.notes_id === notes_id ? { ...prevNote, ...data } : prevNote
+        );
       }
     } catch (err) {
       setError(`Failed to delete note: ${err.message}`);
@@ -108,16 +113,13 @@ function NotesList() {
           />
         ))
       )}
-      <button
-        className="create-button"
-        onClick={handleCreateNote}
-      >
+      <button className="create-button" onClick={handleCreateNote}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="48px"
           viewBox="0 -960 960 960"
           width="48px"
-          fill="#ef4444"
+          fill="white"
         >
           <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
         </svg>
