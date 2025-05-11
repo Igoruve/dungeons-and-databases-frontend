@@ -88,7 +88,7 @@ function Auth() {
           required
         />
         <button
-          className="bg-red-500 dark:bg-red-600 text-zinc-100 dark:text-zinc-900 text-shadow-md w-full my-4 rounded-md py-2"
+          className="form-button"
           type="submit"
           disabled={isLoading}
         >

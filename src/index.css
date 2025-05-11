@@ -153,3 +153,7 @@
 .form-create-character {
   @apply px-6 py-4 flex flex-col gap-4 w-full;
 }
+
+.section-class-extended {
+  @apply bg-zinc-50 dark:bg-zinc-800 px-10 pt-20 pb-20 flex flex-col min-h-screen;
+}

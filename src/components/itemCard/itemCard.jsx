@@ -43,33 +43,20 @@ function ItemCard({ data }) {
             </motion.div>
           </div>
           <div className="div-card-button">
-            <button
-              className="button-card"
-              onClick={() => setExpanded(!expanded)}
-            >
-              {expanded ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="32px"
-                  viewBox="0 -960 960 960"
-                  width="32px"
-                  fill="#ef4444"
-                >
-                  <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="32px"
-                  viewBox="0 -960 960 960"
-                  width="32px"
-                  fill="#ef4444"
-                >
-                  <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
-                </svg>
-              )}
-            </button>
-          </div>
+        <button className="button-card" onClick={() => setExpanded(!expanded)}>
+          <motion.svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="32px"
+            viewBox="0 -960 960 960"
+            width="32px"
+            fill="#ef4444"
+            animate={{ rotate: expanded ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+          </motion.svg>
+        </button>
+      </div>
         </section>
       </article>
     </>

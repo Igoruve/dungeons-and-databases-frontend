@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { motion } from "framer-motion";
+import RouteContext from "../../context/RouterContext.jsx";
+import ClassContext from "../../context/ClassContext.jsx";
 
 function ClassCard({ data }) {
   const [expanded, setExpanded] = useState(false);
+  const { onRouteChange } = useContext(RouteContext);
+  const { setSelectedClassId } = useContext(ClassContext);
+
+  console.log("Data in ClassCard:", data);
+
+  const handleNavigate = () => {
+    console.log("Selected Class ID:", data.class_id); // Cambiado a data.class_id
+    setSelectedClassId(data.class_id); // Cambiado a data.class_id
+    onRouteChange("classFeatures");
+  };
+
   return (
     <section className="section-card">
       <div className="div-card" onClick={() => setExpanded(!expanded)}>
@@ -13,17 +26,17 @@ function ClassCard({ data }) {
 
         <motion.div
           className="div-card-content"
-          initial={{ maxHeight: 0, opacity: 0 }} 
+          initial={{ maxHeight: 0, opacity: 0 }}
           animate={{
-            maxHeight: expanded ? "1000px" : 0, 
-            opacity: expanded ? 1 : 0, 
+            maxHeight: expanded ? "1000px" : 0,
+            opacity: expanded ? 1 : 0,
           }}
           transition={{
-            duration: 0.4, 
-            ease: "easeInOut", 
+            duration: 0.4,
+            ease: "easeInOut",
           }}
           style={{
-            overflow: "hidden", 
+            overflow: "hidden",
           }}
         >
           <p className="par">
@@ -35,50 +48,27 @@ function ClassCard({ data }) {
           <p className="par">
             <strong>Caster:</strong> {data.caster === 1 ? "yes" : "no"}.
           </p>
-          <p className="par">
-            <strong>Saving Throw Proficiencies:</strong>{" "}
-            {data.saving_throw_proficiencies}.
-          </p>
-          <p className="par">
-            <strong>Tool Proficiencies:</strong>{" "}
-            {data.tool_proficiencies ? data.tool_proficiencies : "none"}.
-          </p>
-          <p className="par">
-            <strong>Weapon Proficiencies:</strong>{" "}
-            {data.weapon_proficiencies ? data.weapon_proficiencies : "none"}.
-          </p>
-          <p className="par">
-            <strong>Skill Proficiencies:</strong> {data.skill_proficiencies}.
-          </p>
-          <p className="par">
-            <strong>Armor Training:</strong>{" "}
-            {data.armor_training ? data.armor_training : "none"}.
-          </p>
+          <button
+            className="text-red-500 text-lg font-bold underline mt-4"
+            onClick={handleNavigate}
+          >
+            View Class Features
+          </button>
         </motion.div>
       </div>
       <div className="div-card-button">
         <button className="button-card" onClick={() => setExpanded(!expanded)}>
-          {expanded ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="32px"
-              viewBox="0 -960 960 960"
-              width="32px"
-              fill="#ef4444"
-            >
-              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="32px"
-              viewBox="0 -960 960 960"
-              width="32px"
-              fill="#ef4444"
-            >
-              <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
-            </svg>
-          )}
+          <motion.svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="32px"
+            viewBox="0 -960 960 960"
+            width="32px"
+            fill="#ef4444"
+            animate={{ rotate: expanded ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+          </motion.svg>
         </button>
       </div>
     </section>

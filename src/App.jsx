@@ -13,6 +13,8 @@ import User from "./components/user/user.jsx";
 import NewNote from "./components/NewNote/NewNote.jsx";
 import { CharacterProvider } from "./context/CharacterContext.jsx";
 import FullForm from "./components/NewCharacter/0index.jsx";
+import ClassFeatures from "./components/classCard/classFeatures.jsx";
+import { ClassProvider } from "./context/ClassContext.jsx";
 
 function App() {
   const [route, setRoute] = useState("login");
@@ -29,21 +31,23 @@ function App() {
     createNote: <NewNote />,
     browser: <Browser />,
     user: <User />,
+    classFeatures: <ClassFeatures />,
   };
-  
 
   return (
     <>
-      <CharacterProvider>
-        <RouteContext.Provider
-          value={{ route: route, onRouteChange: handleRouteChange }}
-        >
-          <AuthComponent>
-            <NavBar />
-            {routes[route] || <p>404 - Page Not Found</p>}
-          </AuthComponent>
-        </RouteContext.Provider>
-      </CharacterProvider>
+      <ClassProvider>
+        <CharacterProvider>
+          <RouteContext.Provider
+            value={{ route: route, onRouteChange: handleRouteChange }}
+          >
+            <AuthComponent>
+              <NavBar />
+              {routes[route] || <p>404 - Page Not Found</p>}
+            </AuthComponent>
+          </RouteContext.Provider>
+        </CharacterProvider>
+      </ClassProvider>
     </>
   );
 }
