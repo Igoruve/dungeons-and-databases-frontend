@@ -5,42 +5,33 @@ Frontend de una aplicación web para gestionar campañas de Dungeons & Dragons, 
 Este proyecto forma parte de una plataforma más amplia llamada Dungeons & Databases, diseñada para facilitar la gestión de partidas de rol. El frontend está construido con React y Vite, y utiliza Tailwind CSS para estilos rápidos y consistentes. Su objetivo es ofrecer una experiencia moderna y accesible para jugadores y másters.
 
 ## Tecnologías utilizadas
-React: Biblioteca principal para la construcción de interfaces de usuario.
+- React: Biblioteca principal para la construcción de interfaces de usuario.
 
-Vite: Herramienta de desarrollo rápida para proyectos frontend modernos.
+- Vite: Herramienta de desarrollo rápida para proyectos frontend modernos.
 
-Tailwind CSS: Framework de utilidades para estilos rápidos y responsivos.
+- Tailwind CSS: Framework de utilidades para estilos rápidos y responsivos.
 
-ESLint & Prettier: Herramientas para mantener un código limpio y consistente.
+- Prettier: Herramientas para mantener un código limpio y consistente.
 
-PostCSS: Procesador de CSS para transformar estilos con plugins.
+- Framer-motion: Animaciones fluidas.
 
 ## Instalación y ejecución local
 Clona el repositorio:
 
-bash
-Copiar
-Editar
 git clone https://github.com/Igoruve/dungeons-and-databases-frontend.git
+
 cd dungeons-and-databases-frontend
+
 Instala las dependencias:
-
-bash
-Copiar
-Editar
 npm install
-Inicia el servidor de desarrollo:
 
-bash
-Copiar
-Editar
+Inicia el servidor de desarrollo:
 npm run dev
+
 La aplicación estará disponible en http://localhost:5173.
 
 ## Estructura del proyecto
-bash
-Copiar
-Editar
+
 ├── src/
 │   ├── components/       # Componentes reutilizables de React
 │   ├── pages/            # Páginas principales de la aplicación
@@ -55,8 +46,6 @@ Editar
 npm run dev: Inicia el servidor de desarrollo.
 
 npm run build: Genera una versión optimizada para producción.
-
-npm run lint: Ejecuta ESLint para analizar el código.
 
 npm run format: Aplica Prettier para formatear el código.
 
