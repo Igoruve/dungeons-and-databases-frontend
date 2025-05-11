@@ -33,8 +33,19 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
             getSpeciesByCharacterId(character.character_id),
             getItemsByCharacterId(character.character_id),
           ]);
-        setStats(stats);
+
+        const normalizedStats = {
+          strength: stats.STR,
+          dexterity: stats.DEX,
+          constitution: stats.CON,
+          intelligence: stats.INT,
+          wisdom: stats.WIS,
+          charisma: stats.CHA,
+        };
+
+        setStats(normalizedStats);
         setSkills(skills);
+        console.log("Skills:", skills);
         setMoney(money);
         setClassInfo(classInfo);
         setSpecies(species);
@@ -49,19 +60,17 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
 
   return (
     <section className="article-card-extended pb-28">
-      <button
-            className="bg-zinc-50/20 backdrop-blur-sm rounded-full flex flex-row justify-center px-2 py-2 text-zinc-900 dark:text-zinc-100 shadow-md w-fit fixed right-8 top-8 z-20"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#ef4444"
-            >
-              <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
-            </svg>
-          </button>
+      <button className="bg-zinc-50/20 backdrop-blur-sm rounded-full flex flex-row justify-center px-2 py-2 text-zinc-900 dark:text-zinc-100 shadow-md w-fit fixed right-8 top-8 z-20">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#ef4444"
+        >
+          <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+        </svg>
+      </button>
       <button className="back-button" onClick={() => onSelect()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -121,10 +130,22 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-sm text-zinc-900 dark:text-zinc-100 leading-tight">
               <span>HP</span>
               <span className="text-xl">
-                {stats && stats[0]
-                  ? ((stats[0].CON - 10) / 2) * character.level +
-                    (classInfo[0]?.hit_die * (character.level - 1) +
-                      classInfo[0]?.hit_die)
+                {stats
+                  ? (() => {
+                      const hpInicial = classInfo[0]?.hit_die;
+                      const hpPorNivelesAdicionales =
+                        Math.ceil(classInfo[0]?.hit_die / 2) *
+                        (character.level - 1);
+                      const modificadorConstitucion =
+                        ((stats.constitution - 10) / 2) * character.level;
+
+                      const totalHP =
+                        hpInicial +
+                        hpPorNivelesAdicionales +
+                        modificadorConstitucion;
+
+                      return totalHP;
+                    })()
                   : "Loading..."}
               </span>
             </div>
@@ -146,31 +167,24 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
           <div className="grid-scnd-square">
             <h3 className="grid-h3">Initiative</h3>
             <p className="grid-par">
-              + {stats && stats[0] ? (stats[0].DEX - 10) / 2 : "Loading..."}
+              + {stats ? (stats.dexterity - 10) / 2 : "Loading..."}
             </p>
           </div>
         </div>
       </article>
 
-      {stats ? <StatsCard stats={stats[0]} /> : <p>Loading...</p>}
+      {stats ? <StatsCard stats={stats} /> : <p>Loading...</p>}
 
-      <section className=" mx-4 max-w-md">
+      <section className="mx-4 max-w-md">
         <div className="grid grid-cols-3 gap-2 border-b border-red-500 py-2 px-4">
           <h3 className="skills-section-text text-center">MOD.</h3>
           <h3 className="skills-section-text text-center">SKILL</h3>
           <h3 className="skills-section-text text-center">BONUS</h3>
         </div>
         {skills && skills.length > 0 ? (
-          skills.map((skill) => {
-            const statValue = stats[0][skill.associated_stat];
-            return (
-              <SkillsCard
-                key={skill.skill_id}
-                skill={skill}
-                statValue={statValue}
-              />
-            );
-          })
+          skills.map((skill) => (
+            <SkillsCard key={skill.skill_id} skill={skill} stats={stats} />
+          ))
         ) : (
           <p className="px-4 py-2">No skills found.</p>
         )}

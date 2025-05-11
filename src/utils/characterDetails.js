@@ -2,7 +2,16 @@ import FetchData from "./Fetch.js";
 
 async function getStatsByCharacterId(id) {
   const response = await FetchData(`/character/${id}/stats`);
-  return response;
+  const normalizedStats = {
+    STR: response.strength || 0,
+    DEX: response.dexterity || 0,
+    CON: response.constitution || 0,
+    INT: response.intelligence || 0,
+    WIS: response.wisdom || 0,
+    CHA: response.charisma || 0,
+  };
+
+  return normalizedStats;
 }
 
 async function getSkillByCharacterId(id) {
@@ -36,5 +45,5 @@ export {
   getItemsByCharacterId,
   getMoneyByCharacterId,
   getSkillByCharacterId,
-  getSpeciesByCharacterId
+  getSpeciesByCharacterId,
 };

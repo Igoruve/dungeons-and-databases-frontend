@@ -20,45 +20,47 @@ function FinalStep({ back }) {
         return;
       }
 
+      console.log("Character state before sending payload:", character);
+
       const statsArray = Array.isArray(character.stats)
         ? character.stats.map(({ name, value }) => ({
-            name,
+            name: name.toLowerCase(),
             value: Number(value) || 0,
           }))
         : [];
 
       const payload = {
-        first_name: String(character.first_name),
-        last_name: String(character.last_name),
+        first_name: String(character.first_name).trim(),
+        last_name: String(character.last_name).trim(),
         alignment: character.alignment || "Neutral",
         appearance: character.appearance || null,
         lore: character.lore || null,
         personality: character.personality || null,
-        age: Number(character.age),
-        level: Number(character.level),
+        age: Number(character.age) || 0,
+        level: Number(character.level) || 1,
         user_id: userData.user_id,
         class_id: character.class?.id || null,
         species_id: character.species?.id || null,
-        items: character.items
-          .filter((item) => item.item_id && item.quantity)
-          .map((item) => ({
-            id: item.item_id,
-            quantity: Number(item.quantity),
-          })),
-        skills: character.skills
-          .filter(
-            (skill) => skill.id !== undefined && skill.proficiency !== undefined
-          )
-          .map((skill) => ({
-            id: skill.id,
-            proficiency: Number(skill.proficiency),
-          })),
+        items: Array.isArray(character.items)
+          ? character.items.map((item) => ({
+              id: item.item_id,
+              quantity: Number(item.quantity),
+            }))
+          : [],
+        skills: Array.isArray(character.skills)
+          ? character.skills.map((skill) => ({
+              id: skill.skill_id,
+              proficiency: Number(skill.proficiency),
+            }))
+          : [],
         stats: statsArray,
+        money: character.money || {},
       };
 
       console.log("Payload being sent to backend:", payload);
 
-      await createCharacter(payload);
+      const createdCharacter = await createCharacter(payload);
+
       onRouteChange("characters");
     } catch (error) {
       console.error("Error creating character:", error);
@@ -144,7 +146,7 @@ function FinalStep({ back }) {
 
       <div className="button-group mt-6">
         {back && (
-          <button onClick={back} className="form-button w-1/2">
+          <button onClick={back} className="form-button-secondary w-1/2">
             Back
           </button>
         )}

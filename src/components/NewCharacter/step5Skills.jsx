@@ -23,35 +23,32 @@ function SelectSkills({ onNext, back }) {
   }, []);
 
   const handleSkillsSelection = (e) => {
-    const selectedSkillId = parseInt(e.target.value, 10);
+    const selectedSkillId = parseInt(e.target.value, 10); 
     if (isNaN(selectedSkillId)) return;
 
     const selectedSkill = skills.find((s) => s.skill_id === selectedSkillId);
-    if (!selectedSkill) return;
+    if (!selectedSkill) {
+      console.error("Skill not found:", selectedSkillId);
+      return;
+    }
 
-    const currentSkills = character.skills || [];
-
-    const isAlreadySelected = currentSkills.some(
-      (s) => s.id === selectedSkillId
+    const updatedSkills = [...(character.skills || [])];
+    const existingSkillIndex = updatedSkills.findIndex(
+      (skill) => skill.id === selectedSkillId
     );
 
-    if (isAlreadySelected) {
-      // Si ya está seleccionado, lo eliminamos (proficiency: 0)
-      updateCharacter(
-        "skills",
-        currentSkills.filter((s) => s.id !== selectedSkillId)
-      );
+    if (existingSkillIndex !== -1) {
+      updatedSkills.splice(existingSkillIndex, 1);
     } else {
-      // Si no está seleccionado, lo agregamos con `proficiency: 1`
-      updateCharacter("skills", [
-        ...currentSkills,
-        {
-          id: selectedSkill.skill_id,
-          name: selectedSkill.name, // agregar esto
-          proficiency: 1,
-        },
-      ]);
+      updatedSkills.push({
+        id: selectedSkill.skill_id, 
+        name: selectedSkill.name,
+        proficiency: 1, 
+      });
     }
+
+    updateCharacter("skills", updatedSkills);
+    console.log("Updated skills in context:", updatedSkills); 
   };
 
   const handleSubmit = (e) => {
@@ -73,7 +70,6 @@ function SelectSkills({ onNext, back }) {
             key={skill.skill_id}
             className="grid grid-cols-[auto,1fr] items-center gap-x-4 py-2"
           >
-            {/* Checkbox invisible */}
             <input
               type="checkbox"
               value={skill.skill_id}
@@ -83,7 +79,6 @@ function SelectSkills({ onNext, back }) {
               className="hidden"
             />
 
-            {/* Checkbox visual personalizado */}
             <label
               htmlFor={`skill-checkbox-${skill.skill_id}`}
               className="w-6 h-6 cursor-pointer border-2 border-gray-500 rounded-lg bg-zinc-50 dark:bg-zinc-600 flex items-center justify-center"
@@ -108,7 +103,7 @@ function SelectSkills({ onNext, back }) {
         ))}
 
         <div className="button-group">
-          <button type="button" onClick={back} className="form-button">
+          <button type="button" onClick={back} className="form-button-secondary">
             Back
           </button>
 

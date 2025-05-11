@@ -79,7 +79,7 @@ function SelectStats({ onNext, back }) {
       ))}
 
       <div className="button-group">
-        <button type="button" onClick={back} className="form-button">
+        <button type="button" onClick={back} className="form-button-secondary">
           Back
         </button>
         <button type="submit" disabled={isLoading} className="form-button">

@@ -31,7 +31,9 @@ function App() {
     createNote: <NewNote />,
     browser: <Browser />,
     user: <User />,
-    classFeatures: <ClassFeatures />,
+    classFeatures: (
+      <ClassFeatures onBack={() => handleRouteChange("browser")} />
+    ),
   };
 
   return (

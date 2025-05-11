@@ -46,11 +46,10 @@ function NewCharacter({ onNext }) {
           onChange={(e) => {
             const value = e.target.value;
             if (/^[a-zA-Z\s]*$/.test(value)) {
-              // Solo letras y espacios
               handleChange("first_name", value);
             }
           }}
-          pattern="[a-zA-Z\s]+" // Validación adicional en el navegador
+          pattern="[a-zA-Z\s]+" 
           title="First name can only contain letters and spaces."
           required
         />
@@ -64,11 +63,10 @@ function NewCharacter({ onNext }) {
           onChange={(e) => {
             const value = e.target.value;
             if (/^[a-zA-Z\s]*$/.test(value)) {
-              // Solo letras y espacios
               handleChange("last_name", value);
             }
           }}
-          pattern="[a-zA-Z\s]+" // Validación adicional en el navegador
+          pattern="[a-zA-Z\s]+"
           title="Last name can only contain letters and spaces."
           required
         />
@@ -82,7 +80,6 @@ function NewCharacter({ onNext }) {
           onChange={(e) => {
             const value = e.target.value;
             if (!isNaN(value) && Number(value) > 0) {
-              // Solo números positivos
               handleChange("age", value);
             }
           }}
@@ -116,7 +113,6 @@ function NewCharacter({ onNext }) {
           onChange={(e) => {
             const value = e.target.value;
             if (!isNaN(value) && Number(value) > 0) {
-              // Solo números positivos
               handleChange("level", value);
             }
           }}

@@ -11,8 +11,8 @@ function ClassCard({ data }) {
   console.log("Data in ClassCard:", data);
 
   const handleNavigate = () => {
-    console.log("Selected Class ID:", data.class_id); // Cambiado a data.class_id
-    setSelectedClassId(data.class_id); // Cambiado a data.class_id
+    console.log("Selected Class ID:", data.class_id); 
+    setSelectedClassId(data.class_id); 
     onRouteChange("classFeatures");
   };
 
@@ -48,8 +48,25 @@ function ClassCard({ data }) {
           <p className="par">
             <strong>Caster:</strong> {data.caster === 1 ? "yes" : "no"}.
           </p>
+          <p className="par">
+            <strong>Armor Training:</strong>{" "}
+            {data.armor_training ? data.armor_training : "none"}.
+          </p>
+          <p className="par">
+            <strong>Weapon Proficiencies:</strong> {data.weapon_proficiencies}.
+          </p>
+          <p className="par">
+            <strong>Saving Throws:</strong> {data.saving_throw_proficiencies}.
+          </p>
+          <p className="par">
+            <strong>Skills:</strong> {data.skill_proficiencies}.
+          </p>
+          <p className="par">
+            <strong>Tools:</strong>{" "}
+            {data.tool_proficiencies ? data.tool_proficiencies : "none"}.
+          </p>
           <button
-            className="text-red-500 text-lg font-bold underline mt-4"
+            className="text-red-500 text-lg font-bold mt-4"
             onClick={handleNavigate}
           >
             View Class Features

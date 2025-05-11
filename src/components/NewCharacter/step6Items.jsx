@@ -22,17 +22,16 @@ function SelectItems({ onNext, back }) {
     fetchItems();
   }, []);
 
-  // Cambios clave aplicados
   const handleItemsSelection = (e) => {
-    const itemId = parseInt(e.target.name, 10);
-    const itemQuantity = Number(e.target.value);
+    const itemId = parseInt(e.target.name, 10); 
+    const itemQuantity = Number(e.target.value); 
 
     if (isNaN(itemQuantity) || itemQuantity < 1) {
       console.error("Invalid quantity:", itemQuantity);
       return;
     }
 
-    const updatedItems = [...character.items];
+    const updatedItems = [...(character.items || [])];
     const existingItemIndex = updatedItems.findIndex(
       (item) => item.id === itemId
     );
@@ -40,13 +39,21 @@ function SelectItems({ onNext, back }) {
     if (existingItemIndex !== -1) {
       updatedItems[existingItemIndex].quantity = itemQuantity;
     } else {
+      const selectedItem = items.find((i) => i.item_id === itemId);
+      if (!selectedItem) {
+        console.error("Item not found:", itemId);
+        return;
+      }
+
       updatedItems.push({
-        id: itemId,
-        name: items.find((i) => i.item_id === itemId)?.name || "Unknown",
+        id: selectedItem.item_id, 
+        name: selectedItem.name,
         quantity: itemQuantity,
       });
     }
+
     updateCharacter("items", updatedItems);
+    console.log("Updated items in context:", updatedItems);
   };
 
   const handleSubmit = (e) => {
@@ -92,7 +99,7 @@ function SelectItems({ onNext, back }) {
         ))}
 
         <div className="button-group">
-          <button type="button" onClick={back} className="form-button">
+          <button type="button" onClick={back} className="form-button-secondary">
             Back
           </button>
 

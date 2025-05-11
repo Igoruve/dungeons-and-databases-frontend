@@ -3,7 +3,7 @@ import { useCharacterContext } from "../../context/CharacterContext";
 import { getAllSpecies } from "../../utils/species";
 
 function SelectSpecies({ onNext, back }) {
-  const { updateCharacter, character } = useCharacterContext(); // Agregamos `character` para depuración
+  const { updateCharacter, character } = useCharacterContext(); 
   const [species, setSpecies] = useState([]);
   const [error, setError] = useState(null);
 
@@ -12,7 +12,7 @@ function SelectSpecies({ onNext, back }) {
       try {
         const arraySpecies = await getAllSpecies();
         setSpecies(arraySpecies);
-        console.log("Species fetched:", arraySpecies); // Depuración
+        console.log("Species fetched:", arraySpecies); 
       } catch (error) {
         console.error("Error loading species:", error);
         setError("Failed to load species. Please try again.");
@@ -43,12 +43,12 @@ function SelectSpecies({ onNext, back }) {
       id: selectedSpecies.species_id,
       name: selectedSpecies.name,
       creature_type: selectedSpecies.creature_type,
-    }); // Depuración
+    }); 
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Character object before proceeding:", character); // Depuración
+    console.log("Character object before proceeding:", character); 
     if (!character.species || !character.species.id) {
       setError("Please select a species before proceeding.");
       return;
@@ -77,7 +77,7 @@ function SelectSpecies({ onNext, back }) {
           ))}
         </select>
         <div className="button-group">
-          <button type="button" onClick={back} className="form-button">
+          <button type="button" onClick={back} className="form-button-secondary">
             Back
           </button>
 

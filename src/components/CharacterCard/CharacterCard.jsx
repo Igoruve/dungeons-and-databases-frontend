@@ -1,5 +1,4 @@
 const CharacterCard = ({ character, onRemove, onSelect }) => {
-  // Verificar que las propiedades existan antes de acceder a ellas
   const className =
     character.class && character.class[0]
       ? character.class[0].name

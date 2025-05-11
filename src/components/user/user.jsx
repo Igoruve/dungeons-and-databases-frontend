@@ -105,7 +105,7 @@ function UserCard() {
           </div>
           <button
             onClick={onLogout}
-            className="px-4 py-2 border border-[var(--accent-color)] rounded-md text-[var(--accent-color)] text-center absolute bottom-24 left-1/2 transform -translate-x-1/2 font-bold bg-white"
+            className="px-4 py-2 border border-[var(--accent-color)] rounded-xl text-[var(--accent-color)] text-center absolute bottom-24 left-1/2 transform -translate-x-1/2 font-bold"
           >
             Log Out...
           </button>

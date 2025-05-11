@@ -19,6 +19,8 @@ async function FetchData(route, method = "GET", data = null) {
   }
 
   try {
+    console.log("Request URL:", url);
+    console.log(options)
     const response = await fetch(url, options);
     const responseData = await response.json();
 

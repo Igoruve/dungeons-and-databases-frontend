@@ -102,7 +102,7 @@ function NotesCardExtended({ notes, onSelect, onRemove, onChange }) {
                 setIsEditing(false);
                 setEditedDescription(notes.description);
               }}
-              className="flex flex-row justify-center px-2 py-2 mb-4 mt-2 text-zinc-900 dark:text-zinc-100 fixed bottom-24 left-8 shadow-md"
+              className="flex flex-row justify-center px-2 py-2 mb-4 mt-2 text-zinc-900 dark:text-zinc-100 fixed bottom-24 left-8 shadow-md rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,7 @@ function NotesCardExtended({ notes, onSelect, onRemove, onChange }) {
             </button>
             <button
               onClick={handleEditNote}
-              className="flex flex-row justify-center px-2 py-2 mb-4 mt-2 text-zinc-900 dark:text-zinc-100 fixed bottom-24 right-8 shadow-md"
+              className="flex flex-row justify-center px-2 py-2 mb-4 mt-2 text-zinc-900 dark:text-zinc-100 fixed bottom-24 right-8 shadow-md rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@ function NotesCardExtended({ notes, onSelect, onRemove, onChange }) {
         )}
         {!isEditing && (
           <button
-            className="flex flex-row justify-center px-2 py-2 text-zinc-900 dark:text-zinc-100 shadow-md w-fit fixed right-8 top-8"
+            className="flex flex-row justify-center px-2 py-2 text-zinc-900 dark:text-zinc-100 shadow-md w-fit fixed right-8 top-8 rounded-full"
             onClick={handleDeleteNote}
           >
             <svg

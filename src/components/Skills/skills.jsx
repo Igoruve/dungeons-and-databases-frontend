@@ -1,4 +1,15 @@
-function SkillsCard({ skill, statValue }) {
+function SkillsCard({ skill, stats }) {
+  const statMapping = {
+    STR: "strength",
+    DEX: "dexterity",
+    CON: "constitution",
+    INT: "intelligence",
+    WIS: "wisdom",
+    CHA: "charisma",
+  };
+
+  const statKey = statMapping[skill.associated_stat];
+  const statValue = stats[statKey] || 0; 
   const bonus = Math.floor((statValue - 10) / 2);
 
   return (

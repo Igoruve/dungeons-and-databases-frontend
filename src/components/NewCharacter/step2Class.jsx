@@ -14,7 +14,7 @@ function SelectClass({ onNext, back }) {
       try {
         const arrayClasses = await getAllClasses();
         setClasses(arrayClasses);
-        console.log("Classes fetched:", arrayClasses);
+        console.log("Classes fetched:", arrayClasses); 
       } catch (error) {
         console.error("Error loading classes:", error);
         setError("Failed to load classes. Please try again.");
@@ -31,11 +31,12 @@ function SelectClass({ onNext, back }) {
     if (selectedClass) {
       setSelectedClass(selectedClass);
       updateCharacter("class", {
-        id: selectedClass.class_id, // Guarda el ID
+        id: selectedClass.class_id, 
         name: selectedClass.name,
         description: selectedClass.description,
       });
       setError(null);
+      console.log("Selected class:", selectedClass);
     }
   };
 
@@ -68,7 +69,7 @@ function SelectClass({ onNext, back }) {
           ))}
         </select>
         <div className="button-group">
-          <button className="form-button" type="button" onClick={back}>
+          <button className="form-button-secondary" type="button" onClick={back}>
             Back
           </button>
           <button className="form-button" type="submit" disabled={isLoading}>
