@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { CharacterProvider, useCharacterContext } from "../../context/CharacterContext";
+import {
+  CharacterProvider,
+  useCharacterContext,
+} from "../../context/CharacterContext";
 import NewCharacter from "./step1BasicInfo";
 import SelectClass from "./step2Class";
 import SelectSpecies from "./step3Species";
@@ -10,7 +13,6 @@ import FinalStep from "./lastsept";
 
 function FullForm() {
   const [step, setStep] = useState(0);
-
   const arraySteps = [
     NewCharacter,
     SelectClass,
@@ -32,11 +34,9 @@ function FullForm() {
   const StepComponent = arraySteps[step];
 
   return (
-    <CharacterProvider>
-      <div>
-        <StepComponent onNext={onNext} back={step === 0 ? null : back} />
-      </div>
-    </CharacterProvider>
+    <div>
+      <StepComponent onNext={onNext} back={step === 0 ? null : back} />
+    </div>
   );
 }
 

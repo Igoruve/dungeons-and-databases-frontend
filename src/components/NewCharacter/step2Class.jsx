@@ -31,6 +31,7 @@ function SelectClass({ onNext, back }) {
     if (selectedClass) {
       setSelectedClass(selectedClass);
       updateCharacter("class", {
+        id: selectedClass.class_id, // Guarda el ID
         name: selectedClass.name,
         description: selectedClass.description,
       });
@@ -48,26 +49,34 @@ function SelectClass({ onNext, back }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Select a Class</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <select onChange={handleClassSelection} defaultValue="">
-        <option value="" disabled>
-          Select a Class
-        </option>
-        {classes.map((charClass) => (
-          <option key={charClass.class_id} value={charClass.class_id}>
-            {charClass.name}
+    <section className="section-card-extended">
+      <form onSubmit={handleSubmit} className="form-create-character">
+        <h2 className="h2-card">Select a Class</h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <select
+          className="form-input"
+          onChange={handleClassSelection}
+          defaultValue=""
+        >
+          <option value="" disabled>
+            Select a Class
           </option>
-        ))}
-      </select>
-      <button type="button" onClick={back}>
-        Back
-      </button>
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? "Saving..." : "Next"}
-      </button>
-    </form>
+          {classes.map((charClass) => (
+            <option key={charClass.class_id} value={charClass.class_id}>
+              {charClass.name}
+            </option>
+          ))}
+        </select>
+        <div className="button-group">
+          <button className="form-button" type="button" onClick={back}>
+            Back
+          </button>
+          <button className="form-button" type="submit" disabled={isLoading}>
+            {isLoading ? "Saving..." : "Next"}
+          </button>
+        </div>
+      </form>
+    </section>
   );
 }
 

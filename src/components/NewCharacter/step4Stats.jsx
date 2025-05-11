@@ -1,132 +1,93 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCharacterContext } from "../../context/CharacterContext";
+
+const defaultStats = [
+  { name: "STR", value: 10 },
+  { name: "DEX", value: 10 },
+  { name: "CON", value: 10 },
+  { name: "INT", value: 10 },
+  { name: "WIS", value: 10 },
+  { name: "CHA", value: 10 },
+];
 
 function SelectStats({ onNext, back }) {
   const { character, updateCharacter } = useCharacterContext();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [localStats, setLocalStats] = useState(defaultStats);
+
+  useEffect(() => {
+    if (Array.isArray(character.stats) && character.stats.length > 0) {
+      setLocalStats(character.stats);
+    }
+  }, []);
 
   const handleStatsSelection = (e) => {
     const statName = e.target.name;
     const statValue = Number(e.target.value);
-    console.log(`Handling stat change for ${statName}:`, statValue);
+
     if (statValue < 1 || statValue > 30) {
       setError("Stat value must be between 1 and 30.");
-      console.log("Error: Stat value out of range");
       return;
     }
 
-    console.log("Current stats before update:", character.stats);
-
-    updateCharacter("stats", {
-      ...character.stats,
-      [statName]: statValue,
-    });
-    console.log("Updated stats:", character.stats);
+    setError(null);
+    setLocalStats((prev) =>
+      prev.map((s) => (s.name === statName ? { ...s, value: statValue } : s))
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    for (const stat of localStats) {
+      if (!stat.value || stat.value < 1) {
+        setError(`Please set a valid value for ${stat.name}`);
+        return;
+      }
+    }
+
     setIsLoading(true);
     setError(null);
 
-    console.log("Submitting stats:", character.stats);
-
+    updateCharacter("stats", localStats);
     onNext();
     setIsLoading(false);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Allocate Your Stats</h2>
+    <section className="section-card-extended">
+    <form onSubmit={handleSubmit} className="form-create-character">
+      <h2 className="h2-card">Allocate Your Stats</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <div>
-        <label htmlFor="STR">Strength (STR)</label>
-        <input
-          type="number"
-          id="STR"
-          name="STR"
-          min={1}
-          max={30}
-          value={character.stats.STR || ""}
-          onChange={handleStatsSelection}
-        />
+      {localStats.map((stat) => (
+        <div key={stat.name}>
+          <label htmlFor={stat.name} className="text-zinc-900 dark:text-zinc-100">{stat.name}</label>
+          <input 
+            className="form-input"
+            type="number"
+            id={stat.name}
+            name={stat.name}
+            min={1}
+            max={30}
+            value={stat.value}
+            onChange={handleStatsSelection}
+            required
+          />
+        </div>
+      ))}
+
+      <div className="button-group">
+        <button type="button" onClick={back} className="form-button">
+          Back
+        </button>
+        <button type="submit" disabled={isLoading} className="form-button">
+          {isLoading ? "Saving..." : "Next"}
+        </button>
       </div>
-
-      <div>
-        <label htmlFor="DEX">Dexterity (DEX)</label>
-        <input
-          type="number"
-          id="DEX"
-          name="DEX"
-          min={1}
-          max={30}
-          value={character.stats.DEX || ""}
-          onChange={handleStatsSelection}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="CON">Constitution (CON)</label>
-        <input
-          type="number"
-          id="CON"
-          name="CON"
-          min={1}
-          max={30}
-          value={character.stats.CON || ""}
-          onChange={handleStatsSelection}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="WIS">Wisdom (WIS)</label>
-        <input
-          type="number"
-          id="WIS"
-          name="WIS"
-          min={1}
-          max={30}
-          value={character.stats.WIS || ""}
-          onChange={handleStatsSelection}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="INT">Intelligence (INT)</label>
-        <input
-          type="number"
-          id="INT"
-          name="INT"
-          min={1}
-          max={30}
-          value={character.stats.INT || ""}
-          onChange={handleStatsSelection}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="CHA">Charisma (CHA)</label>
-        <input
-          type="number"
-          id="CHA"
-          name="CHA"
-          min={1}
-          max={30}
-          value={character.stats.CHA || ""}
-          onChange={handleStatsSelection}
-        />
-      </div>
-
-      <button type="button" onClick={back}>
-        Back
-      </button>
-
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? "Saving..." : "Next"}
-      </button>
     </form>
+    </section>
   );
 }
 

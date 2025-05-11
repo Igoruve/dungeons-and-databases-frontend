@@ -1,80 +1,156 @@
 import { useCharacterContext } from "../../context/CharacterContext";
 import { useContext } from "react";
 import RouteContext from "../../context/RouterContext";
+import { createCharacter } from "../../utils/character";
+import { AuthContext } from "../../context/AuthContext";
 
-function FinalStep({ back, onFinish }) {
+function FinalStep({ back }) {
   const { character } = useCharacterContext();
-  const { onRouteChange } = useContext(RouteContext); 
+  const { onRouteChange } = useContext(RouteContext);
+  const { userData } = useContext(AuthContext);
 
   if (!character) {
-    return <p>Loading...</p>;
+    return <p className="par">Loading...</p>;
   }
 
-  const handleFinish = () => {
-    onRouteChange("characters");
+  const handleFinish = async () => {
+    try {
+      if (!userData?.user_id) {
+        alert("User data is not available. Please log in again.");
+        return;
+      }
+
+      const statsArray = Array.isArray(character.stats)
+        ? character.stats.map(({ name, value }) => ({
+            name,
+            value: Number(value) || 0,
+          }))
+        : [];
+
+      const payload = {
+        first_name: String(character.first_name),
+        last_name: String(character.last_name),
+        alignment: character.alignment || "Neutral",
+        appearance: character.appearance || null,
+        lore: character.lore || null,
+        personality: character.personality || null,
+        age: Number(character.age),
+        level: Number(character.level),
+        user_id: userData.user_id,
+        class_id: character.class?.id || null,
+        species_id: character.species?.id || null,
+        items: character.items
+          .filter((item) => item.item_id && item.quantity)
+          .map((item) => ({
+            id: item.item_id,
+            quantity: Number(item.quantity),
+          })),
+        skills: character.skills
+          .filter(
+            (skill) => skill.id !== undefined && skill.proficiency !== undefined
+          )
+          .map((skill) => ({
+            id: skill.id,
+            proficiency: Number(skill.proficiency),
+          })),
+        stats: statsArray,
+      };
+
+      console.log("Payload being sent to backend:", payload);
+
+      await createCharacter(payload);
+      onRouteChange("characters");
+    } catch (error) {
+      console.error("Error creating character:", error);
+      alert("There was an error creating the character. Please try again.");
+    }
   };
 
   return (
-    <section>
-      <h2>Review Your Character</h2>
-      <div>
-        <p>
+    <section className="section-card-extended">
+      <h2 className="h2-card">Review Your Character</h2>
+      <div className="space-y-4 mt-4">
+        <p className="par">
           <strong>Name:</strong> {character.first_name} {character.last_name}
         </p>
-        <p>
+        <p className="par">
           <strong>Age:</strong> {character.age}
         </p>
-        <p>
+        <p className="par">
           <strong>Alignment:</strong> {character.alignment}
         </p>
-        <p>
+        <p className="par">
           <strong>Level:</strong> {character.level}
         </p>
-        <p>
+        <p className="par">
           <strong>Appearance:</strong> {character.appearance}
         </p>
-        <p>
+        <p className="par">
           <strong>Lore:</strong> {character.lore}
         </p>
-        <p>
+        <p className="par">
           <strong>Personality:</strong> {character.personality}
         </p>
-        <p>
-          <strong>Class:</strong> {character.class.name} -{" "}
-          {character.class.description}
+        <p className="par">
+          <strong>Class:</strong> {character.class?.name} -{" "}
+          {character.class?.description}
         </p>
-        <p>
-          <strong>Species:</strong> {character.species.name} -{" "}
-          {character.species.creature_type}
+        <p className="par">
+          <strong>Species:</strong> {character.species?.name} -{" "}
+          {character.species?.creature_type}
         </p>
-        <p>
-          <strong>Items:</strong>
-        </p>
-        <ul>
-          {(character.items || []).map((item) => (
-            <li key={item.item_id}>
-              {item.name} (Quantity: {item.quantity})
-            </li>
-          ))}
-        </ul>
-        <p>
-          <strong>Stats:</strong>
-        </p>
-        <ul>
-          {Object.entries(character.stats).map(([stat, value]) => (
-            <li key={stat}>
-              {stat}: {value}
-            </li>
-          ))}
-        </ul>
-        <p>
+
+        <div>
+          <p className="par">
+            <strong>Items:</strong>
+          </p>
+          {character.items.length > 0 ? (
+            <ul className="list-disc pl-5 space-y-1">
+              {character.items.map((item) => (
+                <li key={item.item_id} className="par">
+                  {item.name} (Quantity: {item.quantity})
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="par">None</p>
+          )}
+        </div>
+
+        <div>
+          <p className="par">
+            <strong>Stats:</strong>
+          </p>
+          <ul className="list-disc pl-5 space-y-1">
+            {Array.isArray(character.stats) && character.stats.length > 0 ? (
+              character.stats.map((stat) => (
+                <li key={stat.name} className="par">
+                  {stat.name}: {stat.value}
+                </li>
+              ))
+            ) : (
+              <li className="par">No stats assigned</li>
+            )}
+          </ul>
+        </div>
+
+        <p className="par">
           <strong>Skills:</strong>{" "}
-          {character.skills.map((s) => s.name).join(", ")}
+          {character.skills.length > 0
+            ? character.skills.map((s) => s.name).join(", ")
+            : "None"}
         </p>
       </div>
-      <div>
-        {back && <button onClick={back}>Back</button>}
-        <button onClick={handleFinish}>Finish</button>
+
+      <div className="button-group mt-6">
+        {back && (
+          <button onClick={back} className="form-button w-1/2">
+            Back
+          </button>
+        )}
+        <button onClick={handleFinish} className="form-button w-1/2">
+          Finish
+        </button>
       </div>
     </section>
   );

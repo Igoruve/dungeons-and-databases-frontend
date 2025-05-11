@@ -32,16 +32,25 @@ function SelectSkills({ onNext, back }) {
     const currentSkills = character.skills || [];
 
     const isAlreadySelected = currentSkills.some(
-      (s) => s.skill_id === selectedSkillId
+      (s) => s.id === selectedSkillId
     );
 
     if (isAlreadySelected) {
+      // Si ya está seleccionado, lo eliminamos (proficiency: 0)
       updateCharacter(
         "skills",
-        currentSkills.filter((s) => s.skill_id !== selectedSkillId)
+        currentSkills.filter((s) => s.id !== selectedSkillId)
       );
     } else {
-      updateCharacter("skills", [...currentSkills, selectedSkill]);
+      // Si no está seleccionado, lo agregamos con `proficiency: 1`
+      updateCharacter("skills", [
+        ...currentSkills,
+        {
+          id: selectedSkill.skill_id,
+          name: selectedSkill.name, // agregar esto
+          proficiency: 1,
+        },
+      ]);
     }
   };
 
@@ -55,30 +64,60 @@ function SelectSkills({ onNext, back }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Select Your Skills</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {skills.map((skill) => (
-        <div key={skill.skill_id}>
-          <label>{skill.name}</label>
-          <input
-            type="checkbox"
-            value={skill.skill_id}
-            checked={character.skills?.some(
-              (s) => s.skill_id === skill.skill_id
-            )}
-            onChange={handleSkillsSelection}
-          />
-        </div>
-      ))}
-      <button type="button" onClick={back}>
-        Back
-      </button>
+    <section className="section-card-extended">
+      <form onSubmit={handleSubmit} className="form-create-character">
+        <h2 className="h2-card">Select Your Skills</h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {skills.map((skill) => (
+          <div
+            key={skill.skill_id}
+            className="grid grid-cols-[auto,1fr] items-center gap-x-4 py-2"
+          >
+            {/* Checkbox invisible */}
+            <input
+              type="checkbox"
+              value={skill.skill_id}
+              checked={character.skills?.some((s) => s.id === skill.skill_id)}
+              onChange={handleSkillsSelection}
+              id={`skill-checkbox-${skill.skill_id}`}
+              className="hidden"
+            />
 
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? "Saving..." : "Next"}
-      </button>
-    </form>
+            {/* Checkbox visual personalizado */}
+            <label
+              htmlFor={`skill-checkbox-${skill.skill_id}`}
+              className="w-6 h-6 cursor-pointer border-2 border-gray-500 rounded-lg bg-zinc-50 dark:bg-zinc-600 flex items-center justify-center"
+            >
+              <span
+                className={`w-4 h-4 rounded-sm transition-all ${
+                  character.skills?.some((s) => s.id === skill.skill_id)
+                    ? "bg-red-500"
+                    : "bg-transparent border"
+                }`}
+              ></span>
+            </label>
+
+            {/* Label de texto */}
+            <label
+              htmlFor={`skill-checkbox-${skill.skill_id}`}
+              className="text-zinc-900 dark:text-zinc-100 cursor-pointer"
+            >
+              {skill.name}
+            </label>
+          </div>
+        ))}
+
+        <div className="button-group">
+          <button type="button" onClick={back} className="form-button">
+            Back
+          </button>
+
+          <button type="submit" disabled={isLoading} className="form-button">
+            {isLoading ? "Saving..." : "Next"}
+          </button>
+        </div>
+      </form>
+    </section>
   );
 }
 

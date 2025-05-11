@@ -3,18 +3,16 @@ import { useCharacterContext } from "../../context/CharacterContext";
 import { getAllSpecies } from "../../utils/species";
 
 function SelectSpecies({ onNext, back }) {
-  const { updateCharacter, character } = useCharacterContext();
+  const { updateCharacter, character } = useCharacterContext(); // Agregamos `character` para depuración
   const [species, setSpecies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedSpecies, setSelectedSpecies] = useState(null);
 
   useEffect(() => {
     async function fetchSpecies() {
       try {
         const arraySpecies = await getAllSpecies();
         setSpecies(arraySpecies);
-        console.log("Species fetched:", arraySpecies);
+        console.log("Species fetched:", arraySpecies); // Depuración
       } catch (error) {
         console.error("Error loading species:", error);
         setError("Failed to load species. Please try again.");
@@ -25,53 +23,70 @@ function SelectSpecies({ onNext, back }) {
 
   const handleSpeciesSelection = (e) => {
     const selectedSpeciesId = Number(e.target.value);
-    console.log("Selected species ID:", selectedSpeciesId);
-    const selectedSpec = species.find(
+    const selectedSpecies = species.find(
       (spec) => spec.species_id === selectedSpeciesId
     );
-    if (selectedSpec) {
-      setSelectedSpecies(selectedSpec);
-      updateCharacter("species", {
-        name: selectedSpec.name,
-        creature_type: selectedSpec.creature_type,
-      });
-      setError(null);
+
+    if (!selectedSpecies) {
+      console.error("Selected species not found:", selectedSpeciesId);
+      alert("The selected species is invalid. Please try again.");
+      return;
     }
+
+    updateCharacter("species", {
+      id: selectedSpecies.species_id,
+      name: selectedSpecies.name,
+      creature_type: selectedSpecies.creature_type,
+    });
+
+    console.log("Updated species in context:", {
+      id: selectedSpecies.species_id,
+      name: selectedSpecies.name,
+      creature_type: selectedSpecies.creature_type,
+    }); // Depuración
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Character species before submit:", character.species);
-    if (!character.species || !character.species.name) {
+    console.log("Character object before proceeding:", character); // Depuración
+    if (!character.species || !character.species.id) {
       setError("Please select a species before proceeding.");
       return;
     }
+
     onNext();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Select a Species</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <select onChange={handleSpeciesSelection} defaultValue="">
-        <option value="" disabled>
-          Select a Species
-        </option>
-        {species.map((spec) => (
-          <option key={spec.species_id} value={spec.species_id}>
-            {spec.name}
+    <section className="section-card-extended">
+      <form onSubmit={handleSubmit} className="form-create-character">
+        <h2 className="h2-card">Select a Species</h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <select
+          onChange={handleSpeciesSelection}
+          defaultValue=""
+          className="form-input"
+        >
+          <option value="" disabled>
+            Select a Species
           </option>
-        ))}
-      </select>
+          {species.map((spec) => (
+            <option key={spec.species_id} value={spec.species_id}>
+              {spec.name}
+            </option>
+          ))}
+        </select>
+        <div className="button-group">
+          <button type="button" onClick={back} className="form-button">
+            Back
+          </button>
 
-      <button type="button" onClick={back}>
-        Back
-      </button>
-
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? "Saving..." : "Next"}
-      </button>
-    </form>
+          <button type="submit" className="form-button">
+            Next
+          </button>
+        </div>
+      </form>
+    </section>
   );
 }
 

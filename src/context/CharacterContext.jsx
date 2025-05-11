@@ -3,17 +3,17 @@ import { createContext, useState, useContext, useCallback } from "react";
 const initialState = {
   first_name: "",
   last_name: "",
-  age: 1,
-  alignment: "",
+  age: 0,
+  alignment: null,
   level: 1,
-  appearance: "",
-  lore: "",
-  personality: "",
+  appearance: null,
+  lore: null,
+  personality: null,
   user_id: "",
-  class: { name: "", description: "" },
-  species: { name: "", creature_type: "" },
+  class: { id: null, name: "", description: "" },
+  species: { id: null, name: "", creature_type: "" },
   items: [],
-  stats: { STR: 0, DEX: 0, CON: 0, INT: 0, WIS: 0, CHA: 0 },
+  stats: {},
   skills: [],
 };
 
@@ -21,6 +21,8 @@ const CharacterContext = createContext({});
 
 function CharacterProvider({ children }) {
   const [character, setCharacter] = useState(initialState);
+  const [characters, setCharacters] = useState([]);
+
   const updateCharacter = useCallback((key, value) => {
     setCharacter((prev) => ({
       ...prev,
@@ -28,9 +30,19 @@ function CharacterProvider({ children }) {
     }));
   }, []);
 
+  const addCharacter = useCallback(() => {
+    setCharacters((prev) => [...prev, character]);
+  }, [character]);
+
   return (
     <CharacterContext.Provider
-      value={{ character, setCharacter, updateCharacter }}
+      value={{
+        character,
+        characters,
+        setCharacter,
+        updateCharacter,
+        addCharacter,
+      }}
     >
       {children}
     </CharacterContext.Provider>
