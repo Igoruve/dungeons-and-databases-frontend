@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const CharacterCard = ({ character, onRemove, onSelect }) => {
   const className =
     character.class && character.class[0]
@@ -13,7 +15,13 @@ const CharacterCard = ({ character, onRemove, onSelect }) => {
       : "No Skills";
 
   return (
-    <article className="w-full content-start">
+    <motion.article
+      className="w-full content-start"
+      initial={{ opacity: 0, x: -50 }} // Estado inicial (invisible y desplazado a la izquierda)
+      animate={{ opacity: 1, x: 0 }} // Estado final (visible y en posición original)
+      exit={{ opacity: 0, x: 50 }} // Estado al salir (desaparece y se desplaza a la derecha)
+      transition={{ duration: 0.3 }} // Duración de la animación
+    >
       <section className="bg-zinc-200 dark:bg-zinc-700 px-4 py-3 mx-4 flex flex-row min-h-40 gap-4 rounded-md shadow-md">
         <div className="div-card" onClick={() => onSelect()}>
           <h2 className="h2-card text-zinc-900 dark:text-zinc-100">
@@ -39,7 +47,7 @@ const CharacterCard = ({ character, onRemove, onSelect }) => {
           </button>
         </div>
       </section>
-    </article>
+    </motion.article>
   );
 };
 

@@ -1,5 +1,6 @@
-const BASE_URL = "http://localhost:3000/api";
-import { getToken, getUser } from "./localStorage";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL_PROD;
+
+import { getToken } from "./localStorage";
 
 async function FetchData(route, method = "GET", data = null) {
   const url = BASE_URL + route;

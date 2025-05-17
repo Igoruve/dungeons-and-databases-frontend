@@ -58,9 +58,30 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
     fetchCharacterDetails();
   }, [character.character_id]);
 
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  const handleDeleteCharacter = () => {
+    setShowConfirmModal(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    const error = await onRemove(character.character_id);
+    if (!error) {
+      onSelect(null);
+    }
+    setShowConfirmModal(false);
+  };
+
+  const handleCancel = () => {
+    setShowConfirmModal(false);
+  };
+
   return (
     <section className="article-card-extended pb-28">
-      <button className="bg-zinc-50/20 backdrop-blur-sm rounded-full flex flex-row justify-center px-2 py-2 text-zinc-900 dark:text-zinc-100 shadow-md w-fit fixed right-8 top-8 z-20">
+      <button
+        className="flex flex-row justify-center px-2 py-2 text-zinc-900 dark:text-zinc-100 shadow-md w-fit fixed right-8 top-8 rounded-full"
+        onClick={handleDeleteCharacter}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
@@ -175,7 +196,7 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
 
       {stats ? <StatsCard stats={stats} /> : <p>Loading...</p>}
 
-      <section className="mx-4 max-w-md">
+      <section className="mx-auto max-w-md">
         <div className="grid grid-cols-3 gap-2 border-b border-red-500 py-2 px-4">
           <h3 className="skills-section-text text-center">MOD.</h3>
           <h3 className="skills-section-text text-center">SKILL</h3>
@@ -191,7 +212,7 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
       </section>
 
       <section className="mt-4">
-        <div className="grid grid-cols-2 gap-2 max-w-md mx-4 py-2 px-4 border-b border-red-500">
+        <div className="grid grid-cols-2 gap-2 max-w-md mx-auto py-2 px-4 border-b border-red-500">
           <h3 className="skills-section-text text-center">ITEM</h3>
           <h3 className="skills-section-text text-center">QTY.</h3>
         </div>
@@ -202,11 +223,35 @@ function CharacterCardExtended({ character, onRemove, onSelect }) {
         ) : (
           <p>No items found.</p>
         )}
-        <section className="items-center justify-center mt-2">
+        <section className="items-center justify-center mt-2 mx-auto max-w-md">
           <h3 className="skills-section-text px-10">MONEY</h3>
           {money ? <MoneyCard money={money} /> : <p>Loading..</p>}
         </section>
       </section>
+      {showConfirmModal && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-10 px-4">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h3 className="text-lg font-semibold text-zinc-800">
+              Confirmation
+            </h3>
+            <p className="mt-2 text-zinc-600">Are you sure?</p>
+            <div className="mt-4 flex justify-end gap-4">
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded-2xl"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+              <button
+                className="delete-confirm-button"
+                onClick={handleDeleteConfirm}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
