@@ -32,15 +32,18 @@ La aplicación estará disponible en http://localhost:5173.
 
 ## Estructura del proyecto
 
-├── src/
-│   ├── components/       # Componentes reutilizables de React
-│   ├── pages/            # Páginas principales de la aplicación
-│   ├── assets/           # Imágenes y recursos estáticos
-│   └── App.jsx           # Componente raíz de la aplicación
-├── index.html            # Archivo HTML principal
-├── tailwind.config.js    # Configuración de Tailwind CSS
-├── vite.config.js        # Configuración de Vite
-└── package.json          # Dependencias y scripts del proyecto
+```
+📁 dungeons-and-databases-frontend/
+├── 📁 src/
+│   ├── 📁 components/       # Componentes reutilizables de React
+│   ├── 📁 pages/            # Páginas principales de la aplicación
+│   ├── 📁 assets/           # Imágenes y recursos estáticos
+│   └── 📄 App.jsx           # Componente raíz de la aplicación
+├── 📄 index.html            # Archivo HTML principal
+├── 📄 tailwind.config.js    # Configuración de Tailwind CSS
+├── 📄 vite.config.js        # Configuración de Vite
+└── 📄 package.json          # Dependencias y scripts del proyecto
+```
 
 ## Scripts disponibles
 npm run dev: Inicia el servidor de desarrollo.
