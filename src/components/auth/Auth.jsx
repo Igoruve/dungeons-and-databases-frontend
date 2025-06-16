@@ -96,7 +96,7 @@ function Auth() {
         Password: <strong>1234</strong> <br />
         Use these credentials to log in and test the app.
         <br />
-        (It's best suited for mobile devices ass is thought for an app prototype.)
+        (It's best suited for mobile devices as is thought for an app prototype.)
         <br />
       </p>
     </section>

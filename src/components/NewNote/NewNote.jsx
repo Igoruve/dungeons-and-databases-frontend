@@ -92,7 +92,7 @@ function NewNote({ onSelect }) {
   };
 
   return (
-    <div className="flex flex-col items-center w-full max-w-md mx-auto pt-8 h-screen bg-zinc-50 dark:bg-zinc-800">
+    <div className="flex flex-col items-center w-screen max-w-md mx-auto pt-8 h-screen bg-zinc-50 dark:bg-zinc-800">
       <button className="back-button" onClick={() => onRouteChange("notes")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
